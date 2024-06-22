@@ -30,9 +30,9 @@ export default function Nav() {
                     <Image width={60} height={20} src="/img/logo.png" alt="letterboxd logo" />
                     <h1 className="text-3xl">Letterboxd</h1>
                 </div>
-                <div className="flex gap-5 items-center">
+                <div className="flex gap-2 items-center">
                     <nav className="text-[#99AABB]">
-                        <ul className="flex gap-4 items-center">
+                        <ul className="flex gap-3 items-center">
                             <li className="hover:bg-[#8899AA] relative group rounded-t-md shadow-2xl">
                                 <div className="flex gap-2 px-2 py-2 group-hover:text-white items-center">
                                     <Image src={user.photo} alt="profile picture" width={24} height={24} className="rounded-full aspect-square mt-[-1px]" />
