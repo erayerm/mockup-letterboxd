@@ -56,6 +56,52 @@ export const userNav = [
         link: `/${user.username}/#`
     }
 ]
+export const profileNav = [
+    {
+        name: "Profile",
+        link: `/${user.username}/`
+    },
+    {
+        name: "Films",
+        link: `/${user.username}/films/`
+    },
+    {
+        name: "Diary",
+        link: `/${user.username}/films/diary/`
+    },
+    {
+        name: "Reviews",
+        link: `/${user.username}/films/reviews/`
+    },
+    {
+        name: "Watchlist",
+        link: `/${user.username}/watchlist/`
+    },
+    {
+        name: "Lists",
+        link: `/${user.username}/lists/`
+    },
+    {
+        name: "Likes",
+        link: `/${user.username}/likes/`
+    },
+    {
+        name: "Tags",
+        link: `/${user.username}/tags/`
+    },
+    {
+        name: "Network",
+        link: `/${user.username}/following/`
+    },
+    {
+        name: "Network",
+        link: `/${user.username}/following/`
+    },
+    {
+        name: "Invitations",
+        link: `/invitations/`
+    }
+]
 export const nav = [
     {
         name: "Films",
