@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { user, userNav, nav } from "../mock/nav.js"
+import Link from "next/link.js"
 
 export default function Nav() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -42,13 +43,13 @@ export default function Nav() {
                                 <ul className="shadow-2xl absolute bg-inherit w-full text-[#2c3440] py-2 hidden group-hover:block group-hover:border-t-[1px] border-[#7E8D9E] rounded-b-md font-light text-[12px]">
                                     {userNav.map((item, index) => {
                                         return <>
-                                            <a href={item.link}><li key={index} className={"hover:bg-[#667888] hover:text-white px-2 py-1 border-[#7E8D9E] " + (index === userNav.length - 3 ? "border-t-[1px]" : "")}>{item.name}</li></a>
+                                            <Link href={item.link}><li key={index} className={"hover:bg-[#667888] hover:text-white px-2 py-1 border-[#7E8D9E] " + (index === userNav.length - 3 ? "border-t-[1px]" : "")}>{item.name}</li></Link>
                                         </>
                                     })}
                                 </ul>
                             </li>
-                            <li className="ml-[-8px]"><a href="/activity/"><FontAwesomeIcon icon={faBolt} /></a></li>
-                            {nav.map((item, index) => <li><a href={item.link}>{item.name.toUpperCase()}</a></li>
+                            <li className="ml-[-8px]"><Link href="/activity/"><FontAwesomeIcon icon={faBolt} /></Link></li>
+                            {nav.map((item, index) => <li><Link href={item.link}>{item.name.toUpperCase()}</Link></li>
                             )}
                             <li><button onClick={toggleSearchBox}>{isSearchOpen ? <FontAwesomeIcon icon={faX} /> : <FontAwesomeIcon icon={faMagnifyingGlass} />}</button></li>
                         </ul>
