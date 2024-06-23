@@ -9,4 +9,7 @@
     .border_container::after{
         @apply absolute bottom-0 left-[10%] w-[80%] border-b-2 border-b-[#00E054] content-[""];
     }
+    .container{
+        @apply max-w-[950px] mx-auto 
+    }
 }

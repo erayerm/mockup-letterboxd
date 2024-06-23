@@ -8,8 +8,8 @@ import ProfileNav from "../components/profile/ProfileNav"
 function Profile() {
     const [userData, setUserData] = useState(user)
     return (
-        <div className="w-full h-screen bg-[#20272D] text-[#D8E0E8]">
-            <div className="max-w-[950px] mx-auto">
+        <div className="w-full h-screen bg-[#20272D]">
+            <div className="container">
                 <ProfileTop userData={userData} />
                 <ProfileNav username={userData.username} />
             </div>
