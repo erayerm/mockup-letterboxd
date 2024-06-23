@@ -63,9 +63,9 @@ export default function Nav() {
                             </button>
                         </form>
                     </div>
-                    <div className={`text-white shadow-sm transition-all duration-500 ease-in-out ${!isSearchOpen ? 'opacity-100' : 'opacity-0 w-[0px]'}`}
+                    <div className={`text-white flex shadow-sm transition-all duration-500 ease-in-out ${!isSearchOpen ? 'opacity-100' : 'opacity-0 w-[0px]'}`}
                         style={{ transition: !isSearchOpen ? 'all 500ms ease-in-out' : 'none' }}>
-                        <button className="bg-[#00AC1D] px-2 py-1 rounded-l-[4px]"><FontAwesomeIcon icon={faPlus} /> LOG</button>
+                        <button className="bg-[#00AC1D] px-2 py-1 rounded-l-[4px] flex gap-1 items-center"><FontAwesomeIcon icon={faPlus} /><p>LOG</p></button>
                         <button className="bg-[#25B931] px-2 py-1 rounded-r-[4px]"><FontAwesomeIcon icon={faChevronDown} /></button>{/*Add start a new list*/}
                     </div>
                 </div>
