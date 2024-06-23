@@ -62,6 +62,10 @@ export const profileNav = [
         link: `/${user.username}/`
     },
     {
+        name: "Activity",
+        link: `/${user.username}/following/`
+    },
+    {
         name: "Films",
         link: `/${user.username}/films/`
     },
@@ -88,10 +92,6 @@ export const profileNav = [
     {
         name: "Tags",
         link: `/${user.username}/tags/`
-    },
-    {
-        name: "Network",
-        link: `/${user.username}/following/`
     },
     {
         name: "Network",
