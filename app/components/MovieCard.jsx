@@ -8,7 +8,7 @@ import { user } from "../mock/user.js"
 function MovieCard({ movieData, isRatingOn }) {
     const [isWatched, setIsWatched] = useState(true);
     const [isFavorited, setIsFavorited] = useState(true);
-    const [isMenuOpen, setIsMenuOpen] = useState(true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const router = useRouter();
 
