@@ -39,5 +39,17 @@ export const movies = [
         ],
         genreIDs: [1, 2, 3],
         themes: [1, 2, 3],
+    },
+    {
+        title: "Ready Player One",
+        poster: "https://a.ltrbxd.com/resized/film-poster/2/6/1/8/6/6/261866-ready-player-one-0-1000-0-1500-crop.jpg?v=e84ba98da4"
+    },
+    {
+        title: "Spider-man Into The Spider-verse",
+        poster: "https://a.ltrbxd.com/resized/film-poster/2/5/1/9/4/3/251943-spider-man-into-the-spider-verse-0-1000-0-1500-crop.jpg?v=538fe0ada6"
+    },
+    {
+        title: "the social network",
+        poster: "https://a.ltrbxd.com/resized/sm/upload/nw/cm/pa/ai/sGQv3ZMZBDBnl3z42Q0mEQ5uiDe-0-1000-0-1500-crop.jpg?v=54ee59f7cd"
     }
 ]
