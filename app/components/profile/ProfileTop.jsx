@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapPin } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"
@@ -10,13 +9,13 @@ function ProfileTop({ userData }) {
     return (
         <div className="flex justify-between items-center py-[30px]">
             <div className="flex items-center gap-4">
-                <Image width={100} height={100} src={userData.photo} className="rounded-full outline outline-1 hover:outline-2 outline-offset-[-1px] hover:outline-offset-[-2px] outline-[rgba(216,224,232,0.5)]" />
+                <img width={100} height={100} src={userData.photo} className="rounded-full outline outline-1 hover:outline-2 outline-offset-[-1px] hover:outline-offset-[-2px] outline-[rgba(216,224,232,0.5)]" />
                 <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-4 font-bold">
                         <div className="relative group">
-                            <h1 className="text-2xl group text-secondary-white">{userData.givenName}</h1>
+                            <h1 className="text-2xl group text-secondary-white">{userData.givenName} {userData.familyName}</h1>
                             <div className="absolute top-[-31px] -translate-x-1/2 left-1/2 py-1 px-2 rounded-md text-[0.7rem] bg-[#556677] hidden group-hover:block">
-                                {userData.username.charAt(0).toUpperCase() + userData.username.slice(1)}
+                                {userData.username?.charAt(0).toUpperCase() + userData.username?.slice(1)}
                             </div>
                             <div className="absolute -translate-x-1/2 top-[-6px] left-1/2 size-0 border-[7px] border-[#556677] hidden group-hover:block border-l-transparent border-r-transparent border-b-transparent" />
                         </div>
@@ -24,9 +23,11 @@ function ProfileTop({ userData }) {
                             href="/settings/">EDIT PROFILE</Link>
                         <button className="size-5 rounded-full bg-[#394653] flex items-center justify-center"><p className="mt-[-5px] font-bold text-md">...</p></button>
                     </div>
-                    <div>
-                        <div className="text-[#678] hover:text-[#BBCCDD] flex items-center gap-0.5"><FontAwesomeIcon icon={faMapPin} className="size-3" /> <p>{userData.location}</p></div>
-                    </div>
+                    {userData.location &&
+                        <div>
+                            <div className="text-[#678] hover:text-[#BBCCDD] flex items-center gap-0.5"><FontAwesomeIcon icon={faMapPin} className="size-3" /> <p>{userData.location}</p></div>
+                        </div>
+                    }
                 </div>
             </div>
             <div>
