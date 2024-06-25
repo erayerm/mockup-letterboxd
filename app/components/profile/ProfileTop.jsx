@@ -7,7 +7,6 @@ import Link from "next/link"
 import { user } from "../../mock/user.js"
 
 function ProfileTop({ userData }) {
-
     return (
         <div className="flex justify-between items-center py-[30px]">
             <div className="flex items-center gap-4">
@@ -32,14 +31,9 @@ function ProfileTop({ userData }) {
             </div>
             <div>
                 <div className="flex">
-                    {numberAndTitles.map((item, index) => {
-                        return (
-                            <>
-                                <NumberOf key={index} index={index} number={item.number} title={item.title} link={item.link} />
-                            </>
-                        )
-                    }
-                    )}
+                    {numberAndTitles.map((item, index) => (
+                        <NumberOf key={index} index={index} number={item.number} title={item.title} link={item.link} />
+                    ))}
                 </div>
             </div>
         </div>
@@ -56,8 +50,8 @@ const numberAndTitles = [
 
 function NumberOf({ index, number, title, link }) {
     return (
-        <Link href={link} className={"flex flex-col items-center px-3 group" + (index !== numberAndTitles.length - 1 ? " border-r-[1px] border-r-[rgba(136,153,170,0.1)]" : "")}>
-            <p className="text-[21px] leading-6 font-bold text-secondary-white" >{number}</p>
+        <Link key={index} href={link} className={"flex flex-col items-center px-3 group" + (index !== numberAndTitles.length - 1 ? " border-r-[1px] border-r-[rgba(136,153,170,0.1)]" : "")}>
+            <p className="text-[21px] leading-6 font-bold text-secondary-white">{number}</p>
             <p className="text-[10px] text-[#678] group-hover:text-hover-blue">{title.toUpperCase()}</p>
         </Link>
     )
