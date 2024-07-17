@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import CardNav from './CardNav.jsx';
 
-function MovieCard({ movieData, isRatingOn }) {
+function SmallMovieCard({ movieData, isRatingOn }) {
     const [isWatched, setIsWatched] = useState(true);
     const [isFavorited, setIsFavorited] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +30,7 @@ function MovieCard({ movieData, isRatingOn }) {
                     style={{ backgroundImage: `url(${movieData.poster})` }}
                     onMouseLeave={() => setIsMenuOpen(false)}
                 >
-                    <div className='hidden group-hover:flex relative z-10 gap-2 bg-[rgba(0,0,0,0.7)] px-2 py-1 mb-3 items-center justify-center text-md rounded-lg'>
+                    <div className='hidden group-hover:flex relative z-10 bg-[rgba(0,0,0,0.7)] py-1 mb-[2px] w-full mx-[2px] items-center justify-around text-md rounded-lg'>
                         <button onClick={toggleIsWatched}><FontAwesomeIcon className={isWatched ? 'text-green-400' : ""} icon={faEye} /></button>
                         <button onClick={toggleIsFavorited}><FontAwesomeIcon className={isFavorited ? 'text-[#FF9111]' : ""} icon={faHeart} /></button>
                         <button onClick={toggleIsMenuOpen}><FontAwesomeIcon className='text-lg' icon={faEllipsis} /></button>
@@ -58,4 +58,6 @@ function MovieCard({ movieData, isRatingOn }) {
     )
 }
 
-export default MovieCard
+
+
+export default SmallMovieCard
