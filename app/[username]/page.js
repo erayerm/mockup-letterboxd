@@ -8,13 +8,13 @@ import ProfileSidebar from "../components/profile/ProfileSidebar"
 
 function Profile({ params }) {
     const [userData, setUserData] = useState({})
-
     useEffect(() => {
         (async () => {
             try {
                 const response = await fetch(`/api/users/${params.username}`);
                 const data = await response.json();
                 setUserData(data);
+                dispatch(changeCurrentUser(data));
             } catch (error) {
                 console.error(error);
             }

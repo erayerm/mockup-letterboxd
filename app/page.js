@@ -1,5 +1,7 @@
+import ProductName from "./ProductName";
+
 export default function Home() {
   return (
-    <main>Home</main>
+    <main><ProductName /></main>
   );
 }
