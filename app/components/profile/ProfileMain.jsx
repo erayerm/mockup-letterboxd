@@ -1,4 +1,5 @@
 import FavoriteFilms from "./FavoriteFilms"
+import PopularReviews from "./PopularReviews"
 import RecentActivity from "./RecentActivity"
 import RecentReviews from "./RecentReviews"
 
@@ -8,6 +9,7 @@ function ProfileMain() {
             <FavoriteFilms />
             <RecentActivity />
             <RecentReviews />
+            <PopularReviews />
         </div>
     )
 }
