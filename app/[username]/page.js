@@ -10,7 +10,7 @@ import ProfileSidebar from "../components/profile/ProfileSidebar"
 function Profile() {
     const [userData, setUserData] = useState(user)
     return (
-        <div className="w-full h-screen bg-[#20272D]">
+        <div className="w-full pb-20 bg-[#20272D]">
             <div className="container">
                 <ProfileTop userData={userData} />
                 <ProfileNav username={userData.username} />
