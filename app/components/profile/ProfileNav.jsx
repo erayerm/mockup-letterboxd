@@ -4,7 +4,7 @@ import { faRss } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
-function ProfileNav({ username }) {
+function ProfileNav() {
     return (
         <div className="container pb-[30px]">
             <div className="border border-[rgba(136,153,170,0.1)] flex w-full justify-center items-center">

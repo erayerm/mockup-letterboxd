@@ -1,14 +1,16 @@
 'use client'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../lib/features/counter/counterSlice'
+//import { useSelector, useDispatch } from 'react-redux'
+//import { decrement, increment } from '../lib/features/counter/counterSlice'
 
 export default function Home() {
-  const count = useSelector(state => state.counter.value)
-  const dispatch = useDispatch()
+  //const count = useSelector(state => state.counter.value)
+  //const dispatch = useDispatch()
   return (
     <main>
       <div>
+        Home
+        {/*
         <div>
           <button
             aria-label="Increment value"
@@ -24,6 +26,7 @@ export default function Home() {
             Decrement
           </button>
         </div>
+        */}
       </div>
     </main>
   );
