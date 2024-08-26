@@ -11,8 +11,8 @@ function Following() {
             </div>
             <div className="flex flex-wrap gap-x-2 gap-y-1">
                 {allUsers.map((item, index) => {
-                    return <div className="group relative size-10 rounded-full">
-                        <Link key={index} href={`/${item.username}/`}>
+                    return <div key={index} className="group relative size-10 rounded-full">
+                        <Link href={`/${item.username}/`}>
                             <img src={item.photo} className="rounded-full size-10 outline outline-1 hover:outline-2 outline-offset-[-1px] hover:outline-offset-[-2px] outline-[rgba(216,224,232,0.5)]" />
                         </Link>
                         <div className="absolute top-[-31px] -translate-x-1/2 left-1/2 py-1 px-2 rounded-md text-[0.7rem] bg-[#556677] hidden group-hover:block">

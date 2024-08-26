@@ -32,14 +32,7 @@ function ProfileTop({ userData }) {
             </div>
             <div>
                 <div className="flex">
-                    {numberAndTitles.map((item, index) => {
-                        return (
-                            <>
-                                <NumberOf key={index} index={index} number={item.number} title={item.title} link={item.link} />
-                            </>
-                        )
-                    }
-                    )}
+                    {numberAndTitles.map((item, index) => <NumberOf key={index} index={index} number={item.number} title={item.title} link={item.link} />)}
                 </div>
             </div>
         </div>

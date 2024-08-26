@@ -14,7 +14,7 @@ function PopularReviews() {
             </div>
             <div className="w-full flex flex-col">
                 {[reviews[0], reviews[1]].map((item, index) => {
-                    return <VerticalMovieReview reviewData={item} borderBottom={index === 0} />
+                    return <VerticalMovieReview key={index} reviewData={item} borderBottom={index === 0} />
                 })}
             </div>
         </div>

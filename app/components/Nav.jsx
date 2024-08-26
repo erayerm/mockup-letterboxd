@@ -41,15 +41,11 @@ export default function Nav() {
                                     <div className="mt-[-1px]"><FontAwesomeIcon icon={faChevronDown} /></div>
                                 </div>
                                 <ul className="shadow-2xl z-20 absolute bg-inherit w-full text-[#2c3440] py-2 hidden group-hover:block group-hover:border-t border-[#7E8D9E] rounded-b-md font-light text-xs">
-                                    {userNav.map((item, index) => {
-                                        return <>
-                                            <Link href={item.link}><li key={index} className={"hover:bg-[#667888] hover:text-secondary-white px-2 py-1 border-[#7E8D9E] " + (index === userNav.length - 3 ? "border-t" : "")}>{item.name}</li></Link>
-                                        </>
-                                    })}
+                                    {userNav.map((item, index) => <Link key={index} href={item.link}><li className={"hover:bg-[#667888] hover:text-secondary-white px-2 py-1 border-[#7E8D9E] " + (index === userNav.length - 3 ? "border-t" : "")}>{item.name}</li></Link>)}
                                 </ul>
                             </li>
                             <li className="ml-[-8px]"><Link href="/activity/"><FontAwesomeIcon icon={faBolt} /></Link></li>
-                            {nav.map((item, index) => <li><Link href={item.link}>{item.name.toUpperCase()}</Link></li>
+                            {nav.map((item, index) => <li key={index}><Link href={item.link}>{item.name.toUpperCase()}</Link></li>
                             )}
                             <li><button onClick={toggleSearchBox}>{isSearchOpen ? <FontAwesomeIcon icon={faX} /> : <FontAwesomeIcon icon={faMagnifyingGlass} />}</button></li>
                         </ul>
