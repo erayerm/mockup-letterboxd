@@ -1,14 +1,14 @@
 'use client'
 
-import { useState } from "react"
-import { user } from "../mock/user"
 import ProfileTop from "../components/profile/ProfileTop"
 import ProfileNav from "../components/profile/ProfileNav"
 import ProfileMain from "../components/profile/ProfileMain"
 import ProfileSidebar from "../components/profile/ProfileSidebar"
+import { useSelector } from "react-redux"
 
 function Profile() {
-    const [userData, setUserData] = useState(user)
+    const userData = useSelector(state => state.user)
+    console.log(userData);
     return (
         <div className="w-full pb-20 bg-[#20272D]">
             <div className="container">

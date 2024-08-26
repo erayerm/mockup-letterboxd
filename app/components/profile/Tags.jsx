@@ -11,7 +11,7 @@ function Tags() {
             </div>
             <div className="flex gap-x-5 gap-y-2 flex-wrap">
                 {tags.map((item, index) => {
-                    return <Link href={`/${user.username}/tag/${item.toLowerCase()}/films/`} className="relative group">
+                    return <Link key={index} href={`/${user.username}/tag/${item.toLowerCase()}/films/`} className="relative group">
                         <p className="relative block bg-[#556677] group-hover:bg-[#667888] cursor-pointer hover:text-secondary-white text-[#C8D3E0] px-2 py-1">
                             {item}
                         </p>

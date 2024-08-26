@@ -1,5 +1,6 @@
 import Nav from "./components/Nav";
 import "../styles/globals.css"
+import StoreProvider from "./StoreProvider";
 
 export const metadata = {
   title: "Letterboxd",
@@ -16,8 +17,11 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <main className="w-screen min-h-screen font-[Roboto] text-[13px] text-primary-gray">
-          <Nav />
-          {children}
+          <StoreProvider>
+            <Nav />
+            {children}
+          </StoreProvider>
+
         </main>
       </body>
     </html>
