@@ -17,7 +17,7 @@ function ProfileTop({ userData }) {
                         <div className="relative group">
                             <h1 className="text-2xl group text-secondary-white">{userData.givenName}</h1>
                             <div className="absolute top-[-31px] -translate-x-1/2 left-1/2 py-1 px-2 rounded-md text-[0.7rem] bg-[#556677] hidden group-hover:block">
-                                {userData.username.charAt(0).toUpperCase() + userData.username.slice(1)}
+                                {userData.username?.charAt(0).toUpperCase() + userData.username?.slice(1)}
                             </div>
                             <div className="absolute -translate-x-1/2 top-[-6px] left-1/2 size-0 border-[7px] border-[#556677] hidden group-hover:block border-l-transparent border-r-transparent border-b-transparent" />
                         </div>

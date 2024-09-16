@@ -4,11 +4,28 @@ import ProfileTop from "../components/profile/ProfileTop"
 import ProfileNav from "../components/profile/ProfileNav"
 import ProfileMain from "../components/profile/ProfileMain"
 import ProfileSidebar from "../components/profile/ProfileSidebar"
-import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import API_URL from "../api/url"
+import axios from "axios"
 
-function Profile() {
-    const userData = useSelector(state => state.user)
-    console.log(userData);
+
+function Profile({ params }) {
+    const [userData, setUserData] = useState([]);
+    const { username } = params;
+    useEffect(() => {
+        async function getUser(username) {
+            try {
+                const response = await axios.get(`${API_URL}/users/${username}`);
+                console.log(`User ${username}'s data fetched successfully`)
+                return response.data.userData;
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                throw error;
+            }
+        }
+        setUserData(getUser(username));
+    }, [])
+
     return (
         <div className="w-full pb-20 bg-[#20272D]">
             <div className="container">
