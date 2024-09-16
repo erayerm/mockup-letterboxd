@@ -17,13 +17,13 @@ function Profile({ params }) {
             try {
                 const response = await axios.get(`${API_URL}/users/${username}`);
                 console.log(`User ${username}'s data fetched successfully`)
-                return response.data.userData;
+                setUserData(response.data.userData);
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 throw error;
             }
         }
-        setUserData(getUser(username));
+        getUser(username);
     }, [])
 
     return (
