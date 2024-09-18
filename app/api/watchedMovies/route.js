@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import WatchedMovies from "@/models/watchedMovies"; // Modelin doğru dosya yolunu kontrol et
-import connectMongoDB from "@/utils/connectMongoDB"; // MongoDB bağlantı fonksiyonunun doğru dosya yolunu kontrol et
+import WatchedMovies from "@/models/watchedMovie";
+import connectMongoDB from "@/lib/mongodb";
 
 //first time
 export async function POST(request) {
