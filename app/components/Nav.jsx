@@ -6,10 +6,12 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { user, userNav, nav } from "../mock/nav.js"
 import Link from "next/link.js"
+import RegisterModal from "./RegisterModal.jsx"
 
 export default function Nav() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [stepSearchAnim, setStepSearchAnim] = useState(0);
+
     useEffect(() => {
         if (isSearchOpen) {
             setStepSearchAnim(1);
@@ -18,12 +20,21 @@ export default function Nav() {
             setStepSearchAnim(0);
         }
     }, [isSearchOpen]);
-    useEffect(() => {
-        console.log(stepSearchAnim)
-    }, [stepSearchAnim])
+
     const toggleSearchBox = () => {
         setIsSearchOpen((prev) => !prev)
     }
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <header className="w-screen h-[75px] bg-[#14181C]">
             <div className="container w-full h-full px-5 flex justify-between items-center font-bold tracking-[0.075em]">
@@ -44,6 +55,9 @@ export default function Nav() {
                                     {userNav.map((item, index) => <Link key={index} href={item.link}><li className={"hover:bg-[#667888] hover:text-secondary-white px-2 py-1 border-[#7E8D9E] " + (index === userNav.length - 3 ? "border-t" : "")}>{item.name}</li></Link>)}
                                 </ul>
                             </li>
+                            {/*is logged ?'!^+)(') */}
+                            <button onClick={openModal}>Create Account</button>
+                            <RegisterModal isOpen={isModalOpen} onClose={closeModal} />
                             <li className="ml-[-8px]"><Link href="/activity/"><FontAwesomeIcon icon={faBolt} /></Link></li>
                             {nav.map((item, index) => <li key={index}><Link href={item.link}>{item.name.toUpperCase()}</Link></li>
                             )}

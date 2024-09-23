@@ -17,7 +17,6 @@ export default function Register() {
             password: formData.get("password"),
             username: formData.get("username")
         });
-        await console.log(r);
         ref.current?.reset();
         if (r?.error) {
             setError(r.error);
