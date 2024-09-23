@@ -56,15 +56,6 @@ export default function RegisterModal({ isOpen, onClose }) {
             setUsernameStatus(null);
             return;
         }
-        if (!/^[a-z0-9_]+$/.test(username)) {
-            setUsernameStatus(UsernameStatus.Wrong_Character);
-            return;
-        }
-        if (username.length < 2) {
-            setUsernameStatus(UsernameStatus.Too_Short);
-            return;
-        }
-
         setUsernameStatus(UsernameStatus.Checking);
 
         //debounce ********
