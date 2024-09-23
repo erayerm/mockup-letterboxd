@@ -5,6 +5,8 @@ import { register } from "@/actions/register";
 import { useRouter } from "next/navigation";
 import { checkUsernameUsed } from "@/actions/checkUsernameUsed";
 import UsernameStatus from "../enums/UsernameStatus";
+import { faCheck, faCircle, faPen, faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /*
 TODO
@@ -12,7 +14,6 @@ control email and password
 control if checkboxes checked
 change nav buttons by logged status
 am i gonna autologin after register or just open login page
-css for username status
 */
 
 export default function RegisterModal({ isOpen, onClose }) {
@@ -96,7 +97,7 @@ export default function RegisterModal({ isOpen, onClose }) {
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
             onClick={handleBackgroundClick}
         >
-            <div className="p-8 w-full max-w-[400px] flex flex-col justify-between items-center gap-2 
+            <div className="p-10 w-full max-w-[450px] flex flex-col justify-between items-center gap-2 
         border border-solid border-black bg-[#435666] rounded font-normal">
                 {error && <div className="">{error}</div>}
                 <p className="mb-2 w-full text-[18px]">JOIN LETTERBOXD</p>
@@ -120,7 +121,13 @@ export default function RegisterModal({ isOpen, onClose }) {
                                 onChange={handleChange}
                                 value={username}
                             />
-                            {usernameStatus && <p>{usernameStatus}</p>}
+                            {usernameStatus && {
+                                [UsernameStatus.Checking]: <div className="text-blue-500 flex gap-2 items-center pl-2"><FontAwesomeIcon icon={faCircle} /> {usernameStatus}</div>,
+                                [UsernameStatus.Taken]: <div className="text-orange-500 flex gap-2 items-center pl-2"><FontAwesomeIcon icon={faX} /> {usernameStatus}</div>,
+                                [UsernameStatus.Available]: <div className="text-green-500 flex gap-2 items-center pl-2"><FontAwesomeIcon icon={faCheck} /> {usernameStatus}</div>,
+                                [UsernameStatus.Too_Short]: <div className="text-gray-500 flex gap-2 items-center pl-2"><FontAwesomeIcon icon={faPen} /> {usernameStatus}</div>,
+                                [UsernameStatus.Wrong_Character]: <div className="text-gray-500 flex gap-2 items-center"><FontAwesomeIcon icon={faPen} /> {usernameStatus}</div>,
+                            }[usernameStatus]}
                         </div>
                     </div>
                     <div className="register-input-div">
@@ -131,13 +138,13 @@ export default function RegisterModal({ isOpen, onClose }) {
                             name="password"
                         />
                     </div>
-                    <label class="container-check mt-2">I'm at least 16 years old and accept the <span className="text-[#fff]">Terms of Use</span>.
+                    <label className="container-check mt-2">I'm at least 16 years old and accept the <span className="text-[#fff]">Terms of Use</span>.
                         <input type="checkbox" />
-                        <span class="checkmark"></span>
+                        <span className="checkmark"></span>
                     </label>
-                    <label class="container-check">I accept the <span className="text-[#fff]">Privacy Policy</span> and consent to the processing of my personal information in accodance with it.
+                    <label className="container-check">I accept the <span className="text-[#fff]">Privacy Policy</span> and consent to the processing of my personal information in accodance with it.
                         <input type="checkbox" />
-                        <span class="checkmark"></span>
+                        <span className="checkmark"></span>
                     </label>
                     <button className="mt-10 bg-green-400 hover:bg-green-500 px-2 py-1 rounded-l flex gap-1 items-center">
                         SIGN UP

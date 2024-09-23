@@ -31,11 +31,11 @@
 }
 
 .register-input {
-    @apply mb-4 mt-1 bg-[#CCDDEE] text-[#556677] focus:text-[#000] focus:bg-[#fff] h-8 py-1 px-2.5 rounded
+    @apply bg-[#CCDDEE] text-[#556677] focus:text-[#000] focus:bg-[#fff] h-8 py-1 px-2.5 rounded
 }
 
 .register-input-div {
-    @apply flex flex-col w-full items-start
+    @apply mb-4 flex gap-1 flex-col w-full items-start
 }
 
 
