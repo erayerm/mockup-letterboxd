@@ -29,3 +29,96 @@
     box-shadow: inset 0px 0px 0px 3px #00e054;
     transition: box-shadow 0.1s ease-in;
 }
+
+.register-input {
+    @apply bg-[#CCDDEE] text-[#556677] focus:text-[#000] focus:bg-[#fff] h-8 py-1 px-2.5 rounded
+}
+
+.register-input-div {
+    @apply mb-4 flex gap-1 flex-col w-full items-start
+}
+
+
+/* https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
+.container-check {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #9ab;
+}
+
+.container-check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #CCDDEE;
+  border-radius: 5px;
+}
+
+.container-check:hover input ~ .checkmark {
+  background-color: #fff;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container-check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container-check .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 13px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.form-error-message {
+  @apply text-red-400
+}
+
+.sign-in-input {
+    @apply bg-[#2D3440] focus:bg-[#fff] text-[#556677] focus:text-[#000] h-8 py-1 px-2.5 rounded
+}
+
+.sign-in-input-div {
+    @apply mb-4 flex gap-1 flex-col w-full items-start
+}
+
+.checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #2D3440;
+  background-color: #2D3440;
+  position: relative;
+}
+
+.checkbox:checked::after {
+  content: "✔";
+  @apply text-gray-400 left-[4px] top-0 absolute
+}

@@ -1,18 +1,32 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
-const userSchema = new Schema(
-    {
-        photo: { type: String, required: true },
-        username: { type: String, required: true },
-        givenName: { type: String, required: true },
-        familyName: { type: String, required: false },
-        location: { type: String, required: true },
+const UserSchema = new Schema({
+    email: {
+        type: String,
+        unique: true,
+        required: [true, "Email is required"],
+        match: [
+            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+            "Email is invalid",
+        ],
     },
+    password: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        required: [true, "username is required"]
+    },
+    photo: { type: String },
+    givenName: { type: String },
+    familyName: { type: String },
+    location: { type: String },
+},
     {
         timestamps: true,
     }
 );
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
-
+const User = mongoose.models?.User || model('User', UserSchema);
 export default User;

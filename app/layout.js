@@ -1,6 +1,7 @@
 import Nav from "./components/Nav";
 import "../styles/globals.css"
 import StoreProvider from "./StoreProvider";
+import SessionWrapper from "./SessionProvider";
 
 export const metadata = {
   title: "Letterboxd",
@@ -12,15 +13,17 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
       </head>
       <body>
         <main className="w-screen min-h-screen font-[Roboto] text-[13px] text-primary-gray">
-          <StoreProvider>
-            <Nav />
-            {children}
-          </StoreProvider>
+          <SessionWrapper>
+            <StoreProvider>
+              <Nav />
+              {children}
+            </StoreProvider>
+          </SessionWrapper>
 
         </main>
       </body>
