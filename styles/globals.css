@@ -100,3 +100,25 @@
 .form-error-message {
   @apply text-red-400
 }
+
+.sign-in-input {
+    @apply bg-[#2D3440] focus:bg-[#fff] text-[#556677] focus:text-[#000] h-8 py-1 px-2.5 rounded
+}
+
+.sign-in-input-div {
+    @apply mb-4 flex gap-1 flex-col w-full items-start
+}
+
+.checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #2D3440;
+  background-color: #2D3440;
+  position: relative;
+}
+
+.checkbox:checked::after {
+  content: "✔";
+  @apply text-gray-400 left-[4px] top-0 absolute
+}

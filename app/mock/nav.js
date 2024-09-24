@@ -50,10 +50,6 @@ export const userNav = [
     {
         name: "Subscriptions",
         link: `/settings/subscriptions/`
-    },
-    {
-        name: "Sign Out",
-        link: `/${user.username}/#`
     }
 ]
 export const profileNav = [
