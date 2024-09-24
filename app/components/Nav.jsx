@@ -9,9 +9,10 @@ import Link from "next/link.js"
 import RegisterModal from "./RegisterModal.jsx"
 import SignInForm from "./SignInForm.jsx"
 import { signOut, useSession } from "next-auth/react"
+import { useSelector } from "react-redux"
 
 export default function Nav() {
-    const { data: session } = useSession()
+    const session = useSelector((state) => state.session);
     const [isSearchOpen, setIsSearchOpen] = useState(true);
     const [stepSearchAnim, setStepSearchAnim] = useState(0);
     const [isSignInOpen, setIsSignInOpen] = useState(false);
@@ -56,13 +57,13 @@ export default function Nav() {
                     <h1 className="text-3xl">Letterboxd</h1>
                 </div>
                 {
-                    isSignInOpen /*-------*/
+                    isSignInOpen
                         ? <SignInForm formToggle={handleSignInForm} />
                         : <div className="flex gap-2 items-center">
                             <nav>
                                 <ul className="flex gap-3 items-center">
                                     {
-                                        session /*-------*/
+                                        session
                                             ? <>
                                                 <li className="hover:bg-[#8899AA] relative group rounded-t-md shadow-2xl">
                                                     <div className="flex gap-2 px-2 py-2 group-hover:text-secondary-white items-center">
@@ -90,11 +91,11 @@ export default function Nav() {
                                     }
                                     {nav.map((item, index) => <li key={index}><Link href={item.link}>{item.name.toUpperCase()}</Link></li>
                                     )}
-                                    {session /*-------*/ && <li><button onClick={toggleSearchBox}>{isSearchOpen ? <FontAwesomeIcon icon={faX} /> : <FontAwesomeIcon icon={faMagnifyingGlass} />}</button></li>}
+                                    {session && <li><button onClick={toggleSearchBox}>{isSearchOpen ? <FontAwesomeIcon icon={faX} /> : <FontAwesomeIcon icon={faMagnifyingGlass} />}</button></li>}
                                 </ul>
                             </nav>
                             {
-                                session /*-------*/
+                                session
                                     ? <div className="relative flex items-center">
                                         <form className={`relative flex items-center overflow-hidden transition-all duration-500 ease-in-out rounded-full ${stepSearchAnim === 2 ? 'w-[112px]' : stepSearchAnim === 1 ? 'w-[56px]' : 'w-0'}`}
                                             style={{ transition: isSearchOpen && stepSearchAnim === 2 ? 'all 500ms ease-in-out' : 'none' }}

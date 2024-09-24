@@ -5,7 +5,9 @@ import React from 'react'
 
 const SessionWrapper = ({ children }) => {
     return (
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>
+            {children}
+        </SessionProvider>
     )
 }
 
