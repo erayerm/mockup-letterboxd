@@ -25,7 +25,6 @@ function Profile({ params }) {
         }
         getUser(username);
     }, [])
-
     return (
         <div className="w-full pb-20 bg-[#20272D]">
             <div className="container">
