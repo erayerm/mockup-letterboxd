@@ -3,7 +3,7 @@
 import { faBolt, faChevronDown, faMagnifyingGlass, faPlus, faX } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { user, userNav, nav } from "../mock/nav.js"
 import Link from "next/link.js"
 import RegisterModal from "./RegisterModal.jsx"
@@ -44,10 +44,25 @@ export default function Nav() {
         setIsSignInOpen(prev => !prev)
     };
 
-
     useEffect(() => {
         if (session) setIsSearchOpen(false)
     }, [session])
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const menuCloseTimeout = useRef(null);
+
+    const handleMouseEnter = () => {
+        if (menuCloseTimeout.current) {
+            clearTimeout(menuCloseTimeout.current);
+        }
+        setIsMenuOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+        menuCloseTimeout.current = setTimeout(() => {
+            setIsMenuOpen(false);
+        }, 500);
+    };
 
     return (
         <header className="w-screen h-[75px] bg-[#14181C]">
@@ -65,16 +80,28 @@ export default function Nav() {
                                     {
                                         session
                                             ? <>
-                                                <li className="hover:bg-[#8899AA] relative group rounded-t-md shadow-2xl">
-                                                    <div className="flex gap-2 px-2 py-2 group-hover:text-secondary-white items-center">
+                                                <li className={"relative group rounded-t-md shadow-2xl " + (isMenuOpen ? "bg-[#8899AA]" : "")}>
+                                                    <div onMouseEnter={handleMouseEnter}
+                                                        onMouseLeave={handleMouseLeave}
+                                                        className={"flex gap-2 px-2 py-2 items-center " + (isMenuOpen ? "text-secondary-white" : "")}>
                                                         <Image src={user.photo} alt="profile picture" width={24} height={24} className="rounded-full aspect-square mt-[-1px]" />
                                                         <div>{user.username.toUpperCase()}</div>
                                                         <div className="mt-[-1px]"><FontAwesomeIcon icon={faChevronDown} /></div>
                                                     </div>
-                                                    <ul className="shadow-2xl z-20 absolute bg-inherit w-full text-[#2c3440] py-2 hidden group-hover:block group-hover:border-t border-[#7E8D9E] rounded-b-md font-light text-xs">
-                                                        {userNav.map((item, index) => <Link key={index} href={item.link}><li className={"hover:bg-[#667888] hover:text-secondary-white px-2 py-1 border-[#7E8D9E] " + (index === userNav.length - 3 ? "border-t" : "")}>{item.name}</li></Link>)}
-                                                        <li onClick={signOut} className={"hover:bg-[#667888] hover:text-secondary-white px-2 py-1"}>Sign Out</li>
-                                                    </ul>
+                                                    {isMenuOpen &&
+                                                        <ul onMouseEnter={handleMouseEnter}
+                                                            onMouseLeave={handleMouseLeave}
+                                                            className="shadow-2xl z-20 absolute bg-inherit w-full text-[#2c3440] py-2 border-t border-[#7E8D9E] rounded-b-md font-light text-xs">
+                                                            {userNav.map((item, index) => <Link key={index} href={item.link}>
+                                                                <li className={"hover:bg-[#667888] hover:text-secondary-white px-2 py-1 border-[#7E8D9E] "
+                                                                    + (index === userNav.length - 3 ? "border-t" : "")}>
+                                                                    {item.name}
+                                                                </li>
+                                                            </Link>
+                                                            )}
+                                                            <li onClick={signOut} className={"hover:bg-[#667888] hover:text-secondary-white px-2 py-1"}>Sign Out</li>
+                                                        </ul>
+                                                    }
                                                 </li>
                                                 <li className="ml-[-8px]"><Link href="/activity/"><FontAwesomeIcon icon={faBolt} /></Link></li>
                                             </>
