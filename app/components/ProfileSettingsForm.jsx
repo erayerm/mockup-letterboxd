@@ -1,6 +1,6 @@
 "use client"
 
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faX } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect } from 'react'
 import { useState } from "react";
@@ -13,6 +13,8 @@ function ProfileSettingsForm() {
     const session = useSelector((state) => state.session);
     const [userData, setUserData] = useState({})
     const { register: formRegister, handleSubmit, watch, reset } = useForm();
+    const [isUsernameEditable, setIsUsernameEditable] = useState(false); //if changed in l*?!'
+    const [isUsernameModalOpen, setIsUsernameModalOpen] = useState(false);
 
     useEffect(() => {
         async function getUser(username) {
@@ -46,22 +48,29 @@ function ProfileSettingsForm() {
         }
     };
 
+    const handleUsernameEdit = () => {
+        setIsUsernameModalOpen(true);
+        setIsUsernameEditable(true);
+    }
+
     return (
         <div className='flex items-center gap-3 text-[#fff]'>
+            <UsernameModal isOpen={isUsernameModalOpen} setIsOpen={setIsUsernameModalOpen} />
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full items-center text-[11px] font-normal'>
                 <div className="settings-input-div">
                     <div className='flex justify-between w-full'>
                         <label htmlFor='username-settings'>Username</label>
-                        <button>
-                            <FontAwesomeIcon icon={faPencil} />
+                        <button onClick={handleUsernameEdit} className={isUsernameEditable ? "hidden" : "block"}>
+                            <FontAwesomeIcon icon={faPencil} className='text-gray-500 text-[14px]' />
                         </button>
                     </div>
                     <div className="w-full flex gap-2 items-center">
                         <input
                             type="text"
-                            className="settings-input w-full"
+                            className="settings-input w-full disabled:bg-gray-800"
                             {...formRegister("username", { required: "Enter Your Username" })}
                             id='username-settings'
+                            disabled={!isUsernameEditable}
                         />
                     </div>
                 </div>
@@ -242,6 +251,33 @@ const InfoQuestionMark = ({ text }) => {
             <div className="absolute -translate-x-1/2 top-[-6px] left-1/2 size-0 border-[7px] border-[rgb(102,119,136)] hidden group-hover:block border-l-transparent border-r-transparent border-b-transparent" />
         </div>
     )
+}
+
+const UsernameModal = ({ isOpen, setIsOpen }) => {
+
+    const handleBackgroundClick = (e) => {
+        if (e.target === e.currentTarget) {
+            setIsOpen(false)
+        }
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            onClick={handleBackgroundClick}
+        >
+            <div className="p-10 w-full max-w-[450px] flex flex-col justify-between gap-2 
+        border border-solid border-black bg-[#435666] rounded font-normal">
+                <div className='flex justify-between items-center'>
+                    <p className='text-[18px]'>CHANGING YOUR USERNAME</p>
+                    <button onClick={() => setIsOpen(false)}><FontAwesomeIcon icon={faX} className='text-gray-400 text-[20px]' /></button>
+                </div>
+                <p>You may change your username once every year. When you change your username, your old name becomes available for another member to use, and inbound links to your profile and content may break.</p>
+            </div>
+        </div>
+    );
 }
 
 
