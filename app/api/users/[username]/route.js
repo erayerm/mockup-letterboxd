@@ -19,7 +19,7 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
     try {
         const { username } = params;
-        const { givenName, familyName, location, photo } = await request.json();
+        const { givenName, familyName, location, photo, website, bio, pronoun, posters, replies, includeToMembers, adultContents } = await request.json();
         await connectMongoDB();
         const user = await User.findOne({ username: username });
         if (!user) {
@@ -29,6 +29,13 @@ export async function PUT(request, { params }) {
         if (familyName !== undefined) user.familyName = familyName;
         if (location !== undefined) user.location = location;
         if (photo !== undefined) user.photo = photo;
+        if (website !== undefined) user.website = website;
+        if (bio !== undefined) user.bio = bio;
+        if (pronoun !== undefined) user.pronoun = pronoun;
+        if (posters !== undefined) user.posters = posters;
+        if (replies !== undefined) user.replies = replies;
+        if (includeToMembers !== undefined) user.includeToMembers = includeToMembers;
+        if (adultContents !== undefined) user.adultContents = adultContents;
 
         await user.save();
         return NextResponse.json({ message: "User information updated successfully", user }, { status: 200 });

@@ -109,6 +109,24 @@
     @apply mb-4 flex gap-1 flex-col w-full items-start
 }
 
+
+.settings-input {
+    @apply shadow-[inset_0_-1px_0_#456] bg-[#2D3440] focus:bg-[#fff] text-[#556677] focus:text-[#000] h-8 py-1 px-2.5 mt-1 rounded
+}
+
+.settings-input-div {
+    @apply py-2 w-full
+}
+
+.settings-label {
+  @apply mb-2
+}
+
+textarea.settings-input{
+  height: auto;
+}
+
+
 .checkbox {
   appearance: none;
   width: 20px;
@@ -121,4 +139,8 @@
 .checkbox:checked::after {
   content: "✔";
   @apply text-gray-400 left-[4px] top-0 absolute
+}
+
+.desc-pron>span{
+  @apply text-[#fff]
 }

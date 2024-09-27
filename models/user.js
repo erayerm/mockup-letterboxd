@@ -16,12 +16,20 @@ const UserSchema = new Schema({
     },
     username: {
         type: String,
+        unique: true,
         required: [true, "username is required"]
     },
     photo: { type: String },
     givenName: { type: String },
     familyName: { type: String },
     location: { type: String },
+    website: { type: String },
+    bio: { type: String },
+    pronoun: { type: String },
+    posters: { type: String },
+    replies: { type: String },
+    include_to_members: { type: Boolean },
+    adult_contents: { type: Boolean }
 },
     {
         timestamps: true,

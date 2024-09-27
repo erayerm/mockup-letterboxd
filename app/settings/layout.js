@@ -5,7 +5,7 @@ import SettingsNavbar from "../components/SettingsNav";
 const SettingsLayout = ({ children }) => {
     return (
         <div>
-            <div className="bg-[#20272D] h-screen">
+            <div className="bg-[#20272D] min-h-screen">
                 <div className="container">
                     <div className="py-[28px] flex w-full justify-between items-center">
                         <h1 className="text-[#abc] text-[32px]">Account Settings</h1>
