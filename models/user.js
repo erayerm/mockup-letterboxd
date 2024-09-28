@@ -28,8 +28,8 @@ const UserSchema = new Schema({
     pronoun: { type: String },
     posters: { type: String },
     replies: { type: String },
-    include_to_members: { type: Boolean },
-    adult_contents: { type: Boolean }
+    includeToMembers: { type: Boolean },
+    adultContents: { type: Boolean }
 },
     {
         timestamps: true,
