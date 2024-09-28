@@ -1,19 +1,21 @@
 'use client';
+
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { setSession } from '@/lib/features/sessionSlice';
 
 const SessionManager = ({ children }) => {
     const dispatch = useDispatch();
+    const { data: session, status } = useSession();
 
     useEffect(() => {
-        const fetchSession = async () => {
-            const session = await getSession();
+        if (status === 'authenticated') {
             dispatch(setSession(session));
-        };
-        fetchSession();
-    }, [dispatch]);
+        } else if (status === 'unauthenticated') {
+            dispatch(setSession(null));
+        }
+    }, [session, status, dispatch]);
 
     return <>{children}</>;
 };
