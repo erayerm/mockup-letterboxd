@@ -101,11 +101,11 @@ export const profileNav = [
 export const nav = [
     {
         name: "Films",
-        link: `/${user.username}/films/`
+        link: `/films/`
     },
     {
         name: "Lists",
-        link: `/${user.username}/lists/`
+        link: `/lists/`
     },
     {
         name: "Members",
