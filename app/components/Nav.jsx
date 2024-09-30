@@ -65,7 +65,7 @@ export default function Nav() {
     };
 
     return (
-        <header className="w-screen h-[75px] bg-[#14181C]">
+        <header className="w-screen h-[75px] bg-transparent">
             <div className="container w-full h-full px-5 flex justify-between items-center font-bold tracking-[0.075em]">
                 <div className="h-full text-secondary-white flex gap-3 items-center">
                     <Image width={60} height={20} src="/img/logo.png" alt="letterboxd logo" />

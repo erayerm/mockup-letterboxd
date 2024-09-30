@@ -144,3 +144,8 @@ textarea.settings-input{
 .desc-pron>span{
   @apply text-[#fff]
 }
+
+
+.seffaf {
+   background: linear-gradient(to top, rgb(37,35,35), rgba(255, 0, 0, 0));
+}

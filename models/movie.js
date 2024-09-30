@@ -2,7 +2,9 @@ import mongoose, { Schema } from "mongoose";
 
 const movieSchema = new Schema({
     title: { type: String, required: true },
-    poster: { type: String, required: true },
+    slugifiedTitle: { type: String, required: true, unique: true },
+    poster: { type: String },
+    movieImage: { type: String },
     date: { type: String, required: true },
     directors: [{ type: String }],
     tagline: { type: String },

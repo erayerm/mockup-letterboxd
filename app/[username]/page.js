@@ -26,7 +26,7 @@ function Profile({ params }) {
         getUser(username);
     }, [])
     return (
-        <div className="w-full pb-20 bg-[#20272D]">
+        <div className="w-full pb-20 bg-[#14181C]">
             <div className="container">
                 <ProfileTop userData={userData} />
                 <ProfileNav username={userData.username} />

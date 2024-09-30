@@ -5,6 +5,10 @@ import connectMongoDB from "@/lib/mongodb";
 export async function POST(request, { params }) {
     try {
         const movieData = await request.json();
+        movieData.slugifiedTitle = movieData.title
+            .toLowerCase()
+            .replaceAll(/[.\-'",]/g, "") // "-" işaretini sona aldım veya önüne \ ekleyebilirsin: /[.\-'",]/
+            .replaceAll(" ", "-");
         await connectMongoDB();
         const newMovie = new Movie(movieData);
         await newMovie.save();

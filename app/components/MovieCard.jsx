@@ -25,18 +25,18 @@ function MovieCard({ movieData, isRatingOn }) {
 
     return (
         <>
-            <div className='basis-[155px]'>
-                <div className={"movie-card group relative flex items-end justify-center shadow-custom-inset w-full aspect-[150/225] bg-cover rounded-md"}
+            <div className='w-full'>
+                <div className={"group relative flex items-end justify-center shadow-custom-inset w-full aspect-[150/225] bg-cover rounded-md"}
                     style={{ backgroundImage: `url(${movieData.poster})` }}
                     onMouseLeave={() => setIsMenuOpen(false)}
                 >
-                    <div className='hidden group-hover:flex relative z-10 gap-2 bg-[rgba(0,0,0,0.7)] px-2 py-1 mb-3 items-center justify-center text-md rounded-lg'>
+                    <div className='hidden group-hover:flex relative z-[10] gap-2 bg-[rgba(0,0,0,0.7)] px-2 py-1 mb-3 items-center justify-center text-md rounded-lg'>
                         <button onClick={toggleIsWatched}><FontAwesomeIcon className={isWatched ? 'text-green-400' : ""} icon={faEye} /></button>
                         <button onClick={toggleIsFavorited}><FontAwesomeIcon className={isFavorited ? 'text-[#FF9111]' : ""} icon={faHeart} /></button>
                         <button onClick={toggleIsMenuOpen}><FontAwesomeIcon className='text-lg' icon={faEllipsis} /></button>
                         {isMenuOpen &&
                             <>
-                                <div className='absolute z-50 bottom-[-100%] left-[108%] bg-[#8899AA] text-[#2c3440] rounded-md shadow-lg'>
+                                <div className='absolute z-[50] bottom-[-100%] left-[108%] bg-[#8899AA] text-[#2c3440] rounded-md shadow-lg'>
                                     <ul>
                                         <li className='p-2 text-center'>**Stars**</li>
                                         <CardNav movieUrl={movieUrl} />

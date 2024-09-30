@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
     try {
-        const { id } = params;
+        const { slugifiedTitle } = params;
         await connectMongoDB();
-        const movieData = await Movie.findById(id);
+        const movieData = await Movie.findOne({ "slugifiedTitle": slugifiedTitle });
         if (!movieData) {
             return NextResponse.json({ message: "Movie not found" }, { status: 404 });
         }
