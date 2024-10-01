@@ -32,7 +32,7 @@ export default function CardNav({ movieUrl }) {
     return (
         <>
             {movieCardNav.map((item, index) => {
-                return <li key={index} className='border-[#7E8D9E] border-t px-2 w-[180px] text-center py-1'><Link href={item.link} className=''>{item.name}</Link></li>
+                return <li key={index} className='border-[#7E8D9E] text-[#2c3440] hover:bg-[#667788] hover:text-white border-t px-2 w-[180px] text-center py-1'><Link href={item.link} className=''>{item.name}</Link></li>
             })
             }
         </>

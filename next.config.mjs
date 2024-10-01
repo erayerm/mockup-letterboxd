@@ -1,4 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+import withSvgr from 'next-plugin-svgr';
 
-export default nextConfig;
+export default withSvgr({
+    webpack(config, options) {
+        return config;
+    },
+});

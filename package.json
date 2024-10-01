@@ -25,6 +25,9 @@
     "redux": "^5.0.1"
   },
   "devDependencies": {
+    "install": "^0.13.0",
+    "next-plugin-svgr": "^1.1.10",
+    "npm": "^10.8.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }
