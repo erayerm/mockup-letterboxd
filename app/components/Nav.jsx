@@ -10,12 +10,25 @@ import RegisterModal from "./RegisterModal.jsx"
 import SignInForm from "./SignInForm.jsx"
 import { signOut, useSession } from "next-auth/react"
 import { useSelector } from "react-redux"
+import { usePathname } from "next/navigation"
 
 export default function Nav() {
     const session = useSelector((state) => state.session);
     const [isSearchOpen, setIsSearchOpen] = useState(true);
     const [stepSearchAnim, setStepSearchAnim] = useState(0);
     const [isSignInOpen, setIsSignInOpen] = useState(false);
+
+    const pathname = usePathname();
+    const [isTransparent, setIsTransparent] = useState(false);
+
+    useEffect(() => {
+        if (pathname.startsWith('/films/') && pathname !== '/films') {
+            setIsTransparent(true);
+        } else {
+            setIsTransparent(false);
+        }
+    }, [pathname]);
+
 
     useEffect(() => {
         if (isSearchOpen) {
@@ -65,7 +78,7 @@ export default function Nav() {
     };
 
     return (
-        <header className="w-screen h-[75px] bg-transparent">
+        <header className={"w-screen h-[75px] " + (isTransparent ? "bg-transparent" : "bg-[#20272D]")}>
             <div className="container w-full h-full px-5 flex justify-between items-center font-bold tracking-[0.075em]">
                 <div className="h-full text-secondary-white flex gap-3 items-center">
                     <Image width={60} height={20} src="/img/logo.png" alt="letterboxd logo" />
