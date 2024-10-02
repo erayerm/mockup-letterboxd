@@ -1,5 +1,13 @@
 import mongoose, { Schema, model } from "mongoose";
 
+const WatchedFilmSchema = new Schema({
+    slugifiedTitle: { type: String, required: true },
+    rate: { type: Number },
+    isLiked: { type: Boolean },
+    watchedTimes: { type: Number },
+    isWatchlisted: { type: Boolean }
+});
+
 const UserSchema = new Schema({
     email: {
         type: String,
@@ -29,7 +37,8 @@ const UserSchema = new Schema({
     posters: { type: String },
     replies: { type: String },
     includeToMembers: { type: Boolean },
-    adultContents: { type: Boolean }
+    adultContents: { type: Boolean },
+    watchedFilms: [WatchedFilmSchema]
 },
     {
         timestamps: true,
