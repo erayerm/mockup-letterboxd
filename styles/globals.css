@@ -149,3 +149,13 @@ textarea.settings-input{
 .seffaf {
    background: linear-gradient(to top, rgb(37,35,35), rgba(255, 0, 0, 0));
 }
+
+.film-activity-card-ul>li {
+  @apply py-3 text-center bg-[#445566]
+}
+.film-activity-card-ul>li:first-child {
+  @apply rounded-t-md
+}
+.film-activity-card-ul>li:last-child {
+  @apply rounded-b-md
+}

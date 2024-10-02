@@ -6,6 +6,7 @@ import API_URL from "../../api/url"
 import MovieCard from '@/app/components/MovieCard';
 import Link from 'next/link';
 import FilmNavbar from '@/app/components/FilmNav';
+import FilmActivityCard from '@/app/components/films/FilmActivityCard';
 
 function SingleFilm({ params, children }) {
     const { slugifiedTitle } = params;
@@ -63,7 +64,7 @@ function SingleFilm({ params, children }) {
                                             {children}
                                         </div>
                                         <div className='basis-[34.32%] '>{/*right of the right */}
-                                            right right
+                                            <FilmActivityCard />
                                         </div>
                                     </div>
 
