@@ -2,12 +2,14 @@ import { faCopy, faEye, faHeart, faStopwatch, faX } from "@fortawesome/free-soli
 import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LeftStar from "@/public/img/left-star.svg"
 import RightStar from "@/public/img/right-star.svg"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import API_URL from "@/app/api/url";
 
 function FilmActivityCard() {
     const [isWatched, setIsWatched] = useState(true);
@@ -17,6 +19,7 @@ function FilmActivityCard() {
     const [favoriteHover, setFavoriteHover] = useState(false);
     const [watchlistHover, setWatchlistHover] = useState(false);
     const [rating, setRating] = useState(-1);
+    const [isStarted, setIsStarted] = useState(false);
 
     const pathname = usePathname()
     const pathArr = pathname.split("/");
@@ -58,6 +61,34 @@ function FilmActivityCard() {
             setIsShareOpen(false)
         }, 1000)
     }
+
+    useEffect(() => {
+        const getRating = async () => {
+
+            const response = await axios.get(`${API_URL}/users/${"determinate"}/films?slugifiedTitle=${pathArr[2]}`);
+            setRating(response.data.rate);
+        }
+        getRating()
+        setIsStarted(true);
+    }, [])
+
+    useEffect(() => {
+        const updateRating = async () => {
+            const response = await axios.put(`${API_URL}/users/${"determinate"}/films`,
+                {
+                    slugifiedTitle: pathArr[2],
+                    rate: (rating)
+                }
+            )
+        }
+        try {
+            if (isStarted && rating) {
+                updateRating();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }, [rating])
     return (
         <div className="w-full max-w-[230px] rounded-sm text-[#bcd]">
             <ul className="space-y-[1px] film-activity-card-ul">

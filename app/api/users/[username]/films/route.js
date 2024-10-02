@@ -58,3 +58,29 @@ export async function DELETE(req, { params }) {
         return NextResponse.json({ message: error }, { status: 500 });
     }
 }
+
+export async function GET(req, { params }) {
+    const { username } = params;
+    const { searchParams } = new URL(req.url);
+    const slugifiedTitle = searchParams.get('slugifiedTitle');
+
+    try {
+        await connectMongoDB();
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return NextResponse.json({ message: "User not found" }, { status: 404 });
+        }
+
+        const singleMovieData = user.watchedFilms.find(film => film.slugifiedTitle === slugifiedTitle);
+
+        if (singleMovieData) {
+            return NextResponse.json(singleMovieData, { status: 200 });
+        }
+
+        return NextResponse.json({ message: "Movie not found" }, { status: 404 });
+    } catch (error) {
+        console.log(error); // Hata mesajını yazdır
+        return NextResponse.json({ message: error.message || "An error occurred" }, { status: 500 });
+    }
+}
