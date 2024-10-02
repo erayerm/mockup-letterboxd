@@ -22,7 +22,7 @@ export default function Nav() {
     const [isTransparent, setIsTransparent] = useState(false);
 
     useEffect(() => {
-        if (pathname.startsWith('/films/') && pathname !== '/films') {
+        if (pathname.startsWith('/film/') && pathname !== '/film') {
             setIsTransparent(true);
         } else {
             setIsTransparent(false);
