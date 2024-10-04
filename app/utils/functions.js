@@ -11,3 +11,7 @@ export const getUsersMovieData = async (username, slugifiedTitle) => {
 export const updateUsersMovieData = async (username, data) => {
     return await axios.put(`${API_URL}/users/${username}/films`, data);
 }
+
+export const titleSlugifier = (title) => {
+    return title.toLowerCase().replaceAll(/[.\-'",]/g, "").replaceAll(" ", "-");
+}

@@ -8,23 +8,22 @@ import RightStar from "@/public/img/right-star.svg"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import API_URL from "@/app/api/url";
-import { getUsersMovieData, updateUsersMovieData } from "@/app/api/users/[username]/films/functions";
+import { getUsersMovieData, updateUsersMovieData } from "@/app/utils/functions";
 
 function FilmActivityCard() {
     const [isWatched, setIsWatched] = useState(false);
-    const [isFavorited, setIsFavorited] = useState(false);
+    const [isLiked, setIsFavorited] = useState(false);
     const [isWatchlisted, setIsWatchlisted] = useState(false);
     const [watchHover, setWatchHover] = useState(false);
     const [favoriteHover, setFavoriteHover] = useState(false);
     const [watchlistHover, setWatchlistHover] = useState(false);
-    const [rating, setRating] = useState(-1);
+    const [rate, setRate] = useState(-1);
     const [isStarted, setIsStarted] = useState(false);
 
     const pathname = usePathname()
     const pathArr = pathname.split("/");
     const basePath = "/" + pathArr[1] + "/" + pathArr[2] + "/"
+    const slugifiedTitle = pathArr[2];
     const session = useSelector((state) => state.session);
 
     const [isShareOpen, setIsShareOpen] = useState(false);
@@ -65,9 +64,8 @@ function FilmActivityCard() {
     useEffect(() => {
         try {
             (async () => {
-                const res = await getUsersMovieData(session.user.username, pathArr[2]);
-                console.log(res.data)
-                setRating(res.data.rate);
+                const res = await getUsersMovieData(session.user.username, slugifiedTitle);
+                setRate(res.data.rate);
                 setIsWatched(res.data.watchedTimes > 0);
                 setIsFavorited(res.data.isLiked);
                 setIsWatchlisted(res.data.isWatchlisted);
@@ -83,24 +81,24 @@ function FilmActivityCard() {
             if (isStarted)
                 (async () => {
                     await updateUsersMovieData(session.user.username, {
-                        slugifiedTitle: pathArr[2],
-                        rate: rating,
-                        isLiked: isFavorited,
+                        slugifiedTitle: slugifiedTitle,
+                        rate: rate,
+                        isLiked: isLiked,
                         isWatchlisted: isWatchlisted
                     });
                 })()
-            if (rating > -1) setIsWatched(true);
+            if (rate > -1) setIsWatched(true);
         } catch (error) {
             console.error(error)
         }
-    }, [rating, isFavorited, isWatchlisted])
+    }, [rate, isLiked, isWatchlisted])
 
     useEffect(() => {
-        if (rating <= 0 && isWatched == false && isStarted) {
+        if (rate <= 0 && isWatched == false && isStarted) {
             try {
                 (async () => {
                     await updateUsersMovieData(session.user.username, {
-                        slugifiedTitle: pathArr[2],
+                        slugifiedTitle: slugifiedTitle,
                         watchedTimes: 0
                     });
                 })()
@@ -120,8 +118,8 @@ function FilmActivityCard() {
                             <p>{isWatched ? watchHover ? "Remove" : "Watched" : "Watch"}</p>
                         </div>
                         <div onMouseEnter={handleLikeRemove} onMouseLeave={handleLikeRemove} className="basis-[33%] text-center flex flex-col">
-                            <button className="text-[32px]" onClick={toggleIsFavorited}><FontAwesomeIcon className={isFavorited ? 'text-[#FF9111]' : ""} icon={faHeart} /></button>
-                            <p>{isFavorited ? favoriteHover ? "Remove" : "Liked" : "Like"}</p>
+                            <button className="text-[32px]" onClick={toggleIsFavorited}><FontAwesomeIcon className={isLiked ? 'text-[#FF9111]' : ""} icon={faHeart} /></button>
+                            <p>{isLiked ? favoriteHover ? "Remove" : "Liked" : "Like"}</p>
                         </div>
                         <div onMouseEnter={handleWatchlistRemove} onMouseLeave={handleWatchlistRemove} className="basis-[33%] text-center flex flex-col">
                             <button className="text-[32px]" onClick={toggleIsWatchlisted}><FontAwesomeIcon className={isWatchlisted ? 'text-[#41BCF4]' : ""} icon={faStopwatch} /></button>
@@ -132,7 +130,7 @@ function FilmActivityCard() {
                 <li>
                     <div className="flex flex-col items-center gap-1">
                         <p>Rated</p>
-                        <div><FiveStar greenStars={rating} setGreenStars={setRating} /></div>
+                        <div><FiveStar greenStars={rate} setGreenStars={setRate} /></div>
                     </div>
                 </li>
                 <li>
@@ -156,8 +154,8 @@ function FilmActivityCard() {
                                     <p className="bg-[#2D3440] truncate">{link}</p>
                                     <button onClick={() => navigator.clipboard.writeText(link)} className="border border-[#2D3440] px-1"><FontAwesomeIcon icon={faCopy} /></button>
                                 </div>
-                                <a target="_blank" href={"https://twitter.com/intent/tweet?text=movie: " + pathArr[2] + " link: letterboxd.com" + pathname}><FontAwesomeIcon className="text-[18px]" icon={faTwitter} /></a>
-                                <a target="_blank" href={"https://twitter.com/intent/tweet?text=" + pathArr[2]}><FontAwesomeIcon className="text-[18px]" icon={faFacebook} /></a>
+                                <a target="_blank" href={"https://twitter.com/intent/tweet?text=movie: " + slugifiedTitle + " link: letterboxd.com" + pathname}><FontAwesomeIcon className="text-[18px]" icon={faTwitter} /></a>
+                                <a target="_blank" href={"https://twitter.com/intent/tweet?text=" + slugifiedTitle}><FontAwesomeIcon className="text-[18px]" icon={faFacebook} /></a>
                             </div>
                             : <p>Share</p>
                     }
