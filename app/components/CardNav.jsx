@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { user } from "../mock/user.js"
 
-export default function CardNav({ movieUrl }) {
+//TODO: watchlisted
+export default function CardNav({ movieUrl, isWatchlisted, setIsWatchlisted }) {
     const movieCardNav = [
         {
             name: "Show your activity",

@@ -2,111 +2,46 @@ import { faCopy, faEye, faHeart, faStopwatch, faX } from "@fortawesome/free-soli
 import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import LeftStar from "@/public/img/left-star.svg"
 import RightStar from "@/public/img/right-star.svg"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import { getUsersMovieData, updateUsersMovieData } from "@/app/utils/functions";
 
-function FilmActivityCard() {
-    const [isWatched, setIsWatched] = useState(false);
-    const [isLiked, setIsFavorited] = useState(false);
-    const [isWatchlisted, setIsWatchlisted] = useState(false);
+function FilmActivityCard({
+    isWatched,
+    setIsWatched,
+    isLiked,
+    setIsLiked,
+    isWatchlisted,
+    setIsWatchlisted,
+    rate,
+    setRate
+}) {
+    const session = useSelector((state) => state.session);
+    const pathname = usePathname()
+    const slugifiedTitle = pathname.split("/")[2];
+    const basePath = "/film/" + slugifiedTitle + "/"
+    const link = "www.letterboxd.coms"
+
     const [watchHover, setWatchHover] = useState(false);
     const [favoriteHover, setFavoriteHover] = useState(false);
     const [watchlistHover, setWatchlistHover] = useState(false);
-    const [rate, setRate] = useState(-1);
-    const [isStarted, setIsStarted] = useState(false);
-
-    const pathname = usePathname()
-    const pathArr = pathname.split("/");
-    const basePath = "/" + pathArr[1] + "/" + pathArr[2] + "/"
-    const slugifiedTitle = pathArr[2];
-    const session = useSelector((state) => state.session);
+    const toggleIsWatched = () => rate < 0 ? setIsWatched(prev => !prev) : false;
+    const toggleIsFavorited = () => setIsLiked(prev => !prev);
+    const toggleIsWatchlisted = () => setIsWatchlisted(prev => !prev);
+    const handleWatchRemove = () => setWatchHover(prev => !prev);
+    const handleLikeRemove = () => setFavoriteHover(prev => !prev);
+    const handleWatchlistRemove = () => setWatchlistHover(prev => !prev);
 
     const [isShareOpen, setIsShareOpen] = useState(false);
-    const link = "www.letterboxd.coms"
-    const toggleIsWatched = () => {
-        setIsWatched((prev) => !prev);
-    }
-    const toggleIsFavorited = () => {
-        setIsFavorited((prev) => !prev);
-    }
-    const toggleIsWatchlisted = () => {
-        setIsWatchlisted((prev) => !prev);
-    }
-
-    const handleWatchRemove = () => {
-        setWatchHover((prev) => !prev);
-    }
-    const handleLikeRemove = () => {
-        setFavoriteHover((prev) => !prev);
-    }
-    const handleWatchlistRemove = () => {
-        setWatchlistHover((prev) => !prev);
-    }
-
     const shareRef = useRef(null)
+    const handleMouseLeaveShare = () => shareRef.current = setTimeout(() => setIsShareOpen(false), 1000)
     const handleMouseEnterShare = () => {
-        if (shareRef.current) {
-            clearTimeout(shareRef.current)
-        }
+        if (shareRef.current) clearTimeout(shareRef.current);
         setIsShareOpen(true)
     }
-    const handleMouseLeaveShare = () => {
-        shareRef.current = setTimeout(() => {
-            setIsShareOpen(false)
-        }, 1000)
-    }
-
-    useEffect(() => {
-        try {
-            (async () => {
-                const res = await getUsersMovieData(session.user.username, slugifiedTitle);
-                setRate(res.data.rate);
-                setIsWatched(res.data.watchedTimes > 0);
-                setIsFavorited(res.data.isLiked);
-                setIsWatchlisted(res.data.isWatchlisted);
-            })()
-        } catch (error) {
-            console.error(error)
-        }
-        setIsStarted(true);
-    }, [])
-
-    useEffect(() => {
-        try {
-            if (isStarted)
-                (async () => {
-                    await updateUsersMovieData(session.user.username, {
-                        slugifiedTitle: slugifiedTitle,
-                        rate: rate,
-                        isLiked: isLiked,
-                        isWatchlisted: isWatchlisted
-                    });
-                })()
-            if (rate > -1) setIsWatched(true);
-        } catch (error) {
-            console.error(error)
-        }
-    }, [rate, isLiked, isWatchlisted])
-
-    useEffect(() => {
-        if (rate <= 0 && isWatched == false && isStarted) {
-            try {
-                (async () => {
-                    await updateUsersMovieData(session.user.username, {
-                        slugifiedTitle: slugifiedTitle,
-                        watchedTimes: 0
-                    });
-                })()
-            } catch (error) {
-                console.error(error)
-            }
-        }
-    }, [isWatched])
 
     return (
         <div className="w-full max-w-[230px] rounded-sm text-[#bcd]">
