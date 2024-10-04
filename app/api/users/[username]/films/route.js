@@ -15,23 +15,27 @@ export async function PUT(req, { params }) {
         }
         const existingFilm = user.watchedFilms.find(film => film.slugifiedTitle === slugifiedTitle);
         if (existingFilm) {
-            if (rate !== undefined) existingFilm.rate = rate;
+            if (rate !== undefined) {
+                existingFilm.rate = rate;
+                existingFilm.watchedTimes = existingFilm.watchedTimes < 1 ? 1 : existingFilm.watchedTimes;
+            }
             if (isLiked !== undefined) existingFilm.isLiked = isLiked;
-            if (watchedTimes !== undefined) existingFilm.watchedTimes = watchedTimes;
+            if (watchedTimes !== undefined) existingFilm.watchedTimes = existingFilm.watchedTimes < 1 ? 1 : watchedTimes;
             if (isWatchlisted !== undefined) existingFilm.isWatchlisted = isWatchlisted;
         } else {
             const newWatchedFilm = {
-                slugifiedTitle
+                "slugifiedTitle": slugifiedTitle
             };
             //defaults
-            newWatchedFilm.rate = rate !== undefined ? rate : 0;
+            newWatchedFilm.rate = rate !== undefined ? rate : -1;
             newWatchedFilm.isLiked = isLiked !== undefined ? isLiked : false;
-            newWatchedFilm.watchedTimes = watchedTimes !== undefined ? watchedTimes : 1;
+            newWatchedFilm.watchedTimes = watchedTimes !== undefined ? watchedTimes < 1 && rate > -1 ? 1 : watchedTimes : 0;
             newWatchedFilm.isWatchlisted = isWatchlisted !== undefined ? isWatchlisted : false;
 
             if (!user.watchedFilms) user.watchedFilms = []
             user.watchedFilms.push(newWatchedFilm);
         }
+        console.log(user);
         await user.save();
         return NextResponse.json({ message: "Film added? successfully", user }, { status: 201 });
     } catch (error) {
@@ -78,7 +82,7 @@ export async function GET(req, { params }) {
             return NextResponse.json(singleMovieData, { status: 200 });
         }
 
-        return NextResponse.json({ message: "Movie not found" }, { status: 404 });
+        return NextResponse.json({ message: "Movie not found", found: false }, { status: 200 });
     } catch (error) {
         console.log(error); // Hata mesajını yazdır
         return NextResponse.json({ message: error.message || "An error occurred" }, { status: 500 });

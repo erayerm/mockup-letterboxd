@@ -10,10 +10,11 @@ import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import API_URL from "@/app/api/url";
+import { getUsersMovieData, updateUsersMovieData } from "@/app/api/users/[username]/films/functions";
 
 function FilmActivityCard() {
-    const [isWatched, setIsWatched] = useState(true);
-    const [isFavorited, setIsFavorited] = useState(true);
+    const [isWatched, setIsWatched] = useState(false);
+    const [isFavorited, setIsFavorited] = useState(false);
     const [isWatchlisted, setIsWatchlisted] = useState(false);
     const [watchHover, setWatchHover] = useState(false);
     const [favoriteHover, setFavoriteHover] = useState(false);
@@ -28,7 +29,6 @@ function FilmActivityCard() {
 
     const [isShareOpen, setIsShareOpen] = useState(false);
     const link = "www.letterboxd.coms"
-
     const toggleIsWatched = () => {
         setIsWatched((prev) => !prev);
     }
@@ -63,32 +63,53 @@ function FilmActivityCard() {
     }
 
     useEffect(() => {
-        const getRating = async () => {
-
-            const response = await axios.get(`${API_URL}/users/${"determinate"}/films?slugifiedTitle=${pathArr[2]}`);
-            setRating(response.data.rate);
+        try {
+            (async () => {
+                const res = await getUsersMovieData(session.user.username, pathArr[2]);
+                console.log(res.data)
+                setRating(res.data.rate);
+                setIsWatched(res.data.watchedTimes > 0);
+                setIsFavorited(res.data.isLiked);
+                setIsWatchlisted(res.data.isWatchlisted);
+            })()
+        } catch (error) {
+            console.error(error)
         }
-        getRating()
         setIsStarted(true);
     }, [])
 
     useEffect(() => {
-        const updateRating = async () => {
-            const response = await axios.put(`${API_URL}/users/${"determinate"}/films`,
-                {
-                    slugifiedTitle: pathArr[2],
-                    rate: (rating)
-                }
-            )
-        }
         try {
-            if (isStarted && rating) {
-                updateRating();
-            }
+            if (isStarted)
+                (async () => {
+                    await updateUsersMovieData(session.user.username, {
+                        slugifiedTitle: pathArr[2],
+                        rate: rating,
+                        isLiked: isFavorited,
+                        isWatchlisted: isWatchlisted
+                    });
+                })()
+            if (rating > -1) setIsWatched(true);
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
-    }, [rating])
+    }, [rating, isFavorited, isWatchlisted])
+
+    useEffect(() => {
+        if (rating <= 0 && isWatched == false && isStarted) {
+            try {
+                (async () => {
+                    await updateUsersMovieData(session.user.username, {
+                        slugifiedTitle: pathArr[2],
+                        watchedTimes: 0
+                    });
+                })()
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    }, [isWatched])
+
     return (
         <div className="w-full max-w-[230px] rounded-sm text-[#bcd]">
             <ul className="space-y-[1px] film-activity-card-ul">
