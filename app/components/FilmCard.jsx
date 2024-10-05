@@ -79,7 +79,7 @@ function FilmCard({ filmData, isBig, isRatingOn }) {
     return (
         <>
             <div className='basis-[155px]'>
-                <div className={(filmState.isWatched ? "movie-card" : "movie-card-white") + " group relative flex items-end justify-center shadow-custom-inset w-full aspect-[150/225] bg-cover rounded-md"}
+                <div className={(filmState.isWatched ? "film-card" : "film-card-white") + " group relative flex items-end justify-center shadow-custom-inset w-full aspect-[150/225] bg-cover rounded-md"}
                     style={{ backgroundImage: `url(${filmData.poster})` }}
                     onMouseLeave={() => setIsMenuOpen(false)}
                 >
