@@ -26,8 +26,11 @@
 }
 
 .movie-card:hover .border-button {
-    box-shadow: inset 0px 0px 0px 3px #00e054;
-    transition: box-shadow 0.1s ease-in;
+    @apply shadow-[inset_0_0_0_3px_#00e054] transition-shadow duration-100 ease-in
+}
+
+.movie-card-white:hover .border-button {
+      @apply shadow-[inset_0_0_0_3px_#fff] transition-shadow duration-100 ease-in
 }
 
 .register-input {
@@ -145,10 +148,6 @@ textarea.settings-input{
   @apply text-[#fff]
 }
 
-
-.seffaf {
-   background: linear-gradient(to top, rgb(37,35,35), rgba(255, 0, 0, 0));
-}
 
 .film-activity-card-ul>li {
   @apply py-3 text-center bg-[#445566]

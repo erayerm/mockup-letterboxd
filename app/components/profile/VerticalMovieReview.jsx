@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
-import SmallMovieCard from "../SmallMovieCard"
+import MovieCard from "../MovieCard.jsx"
 
 
 export default function VerticalMovieReview({ reviewData, borderBottom }) {
@@ -15,7 +15,7 @@ export default function VerticalMovieReview({ reviewData, borderBottom }) {
     return (
         <div className={`flex justify-between ` + (borderBottom ? "border-b pb-3 mb-3 border-b-[rgba(136,153,170,0.5)]" : "")}>
             <div className="basis-[12%]">
-                <SmallMovieCard movieData={movieData} />
+                <MovieCard movieData={movieData} isBig={false} />
             </div>
             <div className="basis-[85%] space-y-2">
                 <h3>

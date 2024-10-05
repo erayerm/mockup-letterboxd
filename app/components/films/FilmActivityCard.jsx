@@ -72,10 +72,10 @@ function FilmActivityCard({
                     <Link href={"/" + session?.user.username + basePath + "activity"}>Show your activity</Link>
                 </li>
                 <li>
-                    <button onClick={() => true/* modal for review */}>Review or log{/* again? */}...</button>
+                    <button onClick={() => true/* TODO:modal for review */}>Review or log{/* TODO:again? */}...</button>
                 </li>
                 <li>
-                    <button onClick={() => true/* modal for lists */}>Add to lists...</button>
+                    <button onClick={() => true/* TODO:modal for lists */}>Add to lists...</button>
                 </li>
                 <li>
                     <p>Go <Link href={"#"} className="mx-1 text-[12px] bg-blue-500 px-[7px] py-[1px] rounded-sm text-[#fff]">PATRON</Link> to change images</p>

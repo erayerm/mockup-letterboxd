@@ -11,7 +11,7 @@ function RecentActivity() {
                 <Link href={`/${user.username}/films/`} className="text-[11px] text-[#678] hover:text-hover-blue">ALL</Link>
             </div>
             <div className="flex justify-between">
-                {movies.map((item, index) => <MovieCard key={index} movieData={item} isRatingOn={true} />
+                {movies.map((item, index) => <MovieCard key={index} movieData={item} isRatingOn={true} isBig={true} />
                 )}
             </div>
         </div>

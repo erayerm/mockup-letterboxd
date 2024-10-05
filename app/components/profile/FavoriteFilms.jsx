@@ -5,7 +5,7 @@ function FavoriteFilms() {
         <div className="">
             <h2 className="w-full border-b pb-1 mb-2 border-b-[rgba(136,153,170,0.5)]">FAVORITE FILMS</h2>
             <div className="flex justify-between">
-                {movies.map((item, index) => <MovieCard key={index} movieData={item} />
+                {movies.map((item, index) => <MovieCard key={index} movieData={item} isBig={true} />
                 )}
             </div>
         </div>
