@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import User from "@/models/user";
 
 //only slugifiedTitle is required
-//it can be used both adding a movie and updating rate, like etc.
+//it can be used both adding a film and updating rate, like etc.
 export async function PUT(req, { params }) {
     const { username } = params;
     const { slugifiedTitle, rate, isLiked, watchedTimes, isWatchlisted } = await req.json();
@@ -76,13 +76,13 @@ export async function GET(req, { params }) {
             return NextResponse.json({ message: "User not found" }, { status: 404 });
         }
 
-        const singleMovieData = user.watchedFilms.find(film => film.slugifiedTitle === slugifiedTitle);
+        const singleFilmData = user.watchedFilms.find(film => film.slugifiedTitle === slugifiedTitle);
 
-        if (singleMovieData) {
-            return NextResponse.json(singleMovieData, { status: 200 });
+        if (singleFilmData) {
+            return NextResponse.json(singleFilmData, { status: 200 });
         }
 
-        return NextResponse.json({ message: "Movie not found", found: false }, { status: 200 });
+        return NextResponse.json({ message: "Film not found", found: false }, { status: 200 });
     } catch (error) {
         console.log(error); // Hata mesajını yazdır
         return NextResponse.json({ message: error.message || "An error occurred" }, { status: 500 });

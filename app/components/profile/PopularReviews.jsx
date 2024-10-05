@@ -2,7 +2,7 @@ import { user } from "../../mock/user.js"
 import { reviews } from "../../mock/reviews.js"
 
 import Link from "next/link"
-import VerticalMovieReview from "./VerticalMovieReview.jsx"
+import VerticalFilmReview from "./VerticalFilmReview.jsx"
 
 function PopularReviews() {
 
@@ -14,7 +14,7 @@ function PopularReviews() {
             </div>
             <div className="w-full flex flex-col">
                 {[reviews[0], reviews[1]].map((item, index) => {
-                    return <VerticalMovieReview key={index} reviewData={item} borderBottom={index === 0} />
+                    return <VerticalFilmReview key={index} reviewData={item} borderBottom={index === 0} />
                 })}
             </div>
         </div>

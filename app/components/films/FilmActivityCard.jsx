@@ -89,7 +89,7 @@ function FilmActivityCard({
                                     <p className="bg-[#2D3440] truncate">{link}</p>
                                     <button onClick={() => navigator.clipboard.writeText(link)} className="border border-[#2D3440] px-1"><FontAwesomeIcon icon={faCopy} /></button>
                                 </div>
-                                <a target="_blank" href={"https://twitter.com/intent/tweet?text=movie: " + slugifiedTitle + " link: letterboxd.com" + pathname}><FontAwesomeIcon className="text-[18px]" icon={faTwitter} /></a>
+                                <a target="_blank" href={"https://twitter.com/intent/tweet?text=film: " + slugifiedTitle + " link: letterboxd.com" + pathname}><FontAwesomeIcon className="text-[18px]" icon={faTwitter} /></a>
                                 <a target="_blank" href={"https://twitter.com/intent/tweet?text=" + slugifiedTitle}><FontAwesomeIcon className="text-[18px]" icon={faFacebook} /></a>
                             </div>
                             : <p>Share</p>

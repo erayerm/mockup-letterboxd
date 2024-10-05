@@ -1,7 +1,7 @@
-function GenresOnMovie() {
+function GenresOnFilm() {
     return (
         <div>Genres</div>
     )
 }
 
-export default GenresOnMovie
+export default GenresOnFilm

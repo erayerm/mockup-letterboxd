@@ -8,7 +8,7 @@ import { titleSlugifier } from '@/app/utils/functions.js';
 import FiveStar from '../FiveStar.jsx';
 
 function FilmPageFilmCard({
-    movieData,
+    filmData,
     isWatched,
     setIsWatched,
     isLiked,
@@ -24,13 +24,13 @@ function FilmPageFilmCard({
     const toggleIsLiked = () => setIsLiked(prev => !prev);
     const toggleIsMenuOpen = () => setIsMenuOpen(prev => !prev);
 
-    const slugifiedTitle = titleSlugifier(movieData.title);
+    const slugifiedTitle = titleSlugifier(filmData.title);
 
     return (
         <>
             <div className='w-full'>
                 <div className={"group relative flex items-end justify-center shadow-custom-inset w-full aspect-[150/225] bg-cover rounded-md"}
-                    style={{ backgroundImage: `url(${movieData.poster})` }}
+                    style={{ backgroundImage: `url(${filmData.poster})` }}
                     onMouseLeave={() => setIsMenuOpen(false)}
                 >
                     <div className='hidden group-hover:flex relative z-[10] gap-2 bg-[rgba(0,0,0,0.7)] px-2 py-1 mb-3 items-center justify-center text-md rounded-lg'>
@@ -44,7 +44,7 @@ function FilmPageFilmCard({
                                         <li className='p-2 text-center w-full flex justify-center'>
                                             <FiveStar greenStars={rate} setGreenStars={setRate} />
                                         </li>
-                                        <CardNav movieUrl={slugifiedTitle}
+                                        <CardNav slugifiedTitle={slugifiedTitle}
                                             isWatchlisted={isWatchlisted}
                                             setIsWatchlisted={setIsWatchlisted} />
                                     </ul>

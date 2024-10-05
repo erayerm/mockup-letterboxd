@@ -1,7 +1,7 @@
 export const reviews = [
     {
         ownerId: 1,
-        movieId: 1,
+        filmId: 1,
         review: "I can never get enough of this movie.",
         tags: ["tag1", "tag2"],
         rating: 5,
@@ -12,7 +12,7 @@ export const reviews = [
     },
     {
         ownerId: 1,
-        movieId: 2,
+        filmId: 2,
         review: "I can never get enough of this movie.",
         tags: ["tag1", "tag2"],
         rating: 4.5,

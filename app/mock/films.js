@@ -1,4 +1,4 @@
-export const movies = [
+export const films = [
     {
         title: "Scott Pilgrim vs. The World",
         poster: "https://a.ltrbxd.com/resized/sm/upload/vs/75/02/fx/2B5zjs5E3xerqAyowpw3QcOCyLq-0-1000-0-1500-crop.jpg?v=3aef2095df",

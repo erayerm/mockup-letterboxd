@@ -1,5 +1,5 @@
-import MovieCard from "../MovieCard"
-import { movies } from "../../mock/movies.js"
+import FilmCard from "../FilmCard"
+import { films } from "../../mock/films.js"
 import { user } from "../../mock/user.js"
 
 import Link from "next/link"
@@ -11,7 +11,7 @@ function RecentActivity() {
                 <Link href={`/${user.username}/films/`} className="text-[11px] text-[#678] hover:text-hover-blue">ALL</Link>
             </div>
             <div className="flex justify-between">
-                {movies.map((item, index) => <MovieCard key={index} movieData={item} isRatingOn={true} isBig={true} />
+                {films.map((item, index) => <FilmCard key={index} filmData={item} isRatingOn={true} isBig={true} />
                 )}
             </div>
         </div>

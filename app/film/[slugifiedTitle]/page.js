@@ -1,7 +1,7 @@
-function CastOnMovie() {
+function CastOnFilm() {
     return (
         <div>Cast</div>
     )
 }
 
-export default CastOnMovie
+export default CastOnFilm

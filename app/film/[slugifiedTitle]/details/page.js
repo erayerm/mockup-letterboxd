@@ -1,7 +1,7 @@
-function DetailsOnMovie() {
+function DetailsOnFilm() {
     return (
         <div>Details</div>
     )
 }
 
-export default DetailsOnMovie
+export default DetailsOnFilm

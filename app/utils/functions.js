@@ -3,12 +3,12 @@
 import axios from "axios";
 import API_URL from "@/app/api/url";
 
-export const getUsersMovieData = async (username, slugifiedTitle) => {
+export const getUsersFilmData = async (username, slugifiedTitle) => {
     const res = await axios.get(`${API_URL}/users/${username}/films?slugifiedTitle=${slugifiedTitle}`);
     return res
 }
 
-export const updateUsersMovieData = async (username, data) => {
+export const updateUsersFilmData = async (username, data) => {
     return await axios.put(`${API_URL}/users/${username}/films`, data);
 }
 

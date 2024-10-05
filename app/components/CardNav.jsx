@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { user } from "../mock/user.js"
 
 //TODO: watchlisted
-export default function CardNav({ movieUrl, isWatchlisted, setIsWatchlisted }) {
-    const movieCardNav = [
+export default function CardNav({ slugifiedTitle, isWatchlisted, setIsWatchlisted }) {
+    const filmCardNav = [
         {
             name: "Show your activity",
-            link: `/${user.username}/film/${movieUrl}/activity/`
+            link: `/${user.username}/film/${slugifiedTitle}/activity/`
         },
         {
             name: "Log or review film...",
@@ -22,17 +22,17 @@ export default function CardNav({ movieUrl, isWatchlisted, setIsWatchlisted }) {
         },
         {
             name: "Show in lists",
-            link: `/film/${movieUrl}/lists/by/popular`
+            link: `/film/${slugifiedTitle}/lists/by/popular`
         },
         {
             name: "Where to watch",
-            link: `/film/${movieUrl}/watch/`
+            link: `/film/${slugifiedTitle}/watch/`
         },
     ]
 
     return (
         <>
-            {movieCardNav.map((item, index) => {
+            {filmCardNav.map((item, index) => {
                 return <li key={index} className='border-[#7E8D9E] text-[#2c3440] hover:bg-[#667788] hover:text-white border-t px-2 w-[180px] text-center py-1'><Link href={item.link} className=''>{item.name}</Link></li>
             })
             }

@@ -2,7 +2,7 @@ import { user } from "../../mock/user.js"
 import { reviews } from "../../mock/reviews.js"
 
 import Link from "next/link"
-import VerticalMovieReview from "./VerticalMovieReview.jsx"
+import VerticalFilmReview from "./VerticalFilmReview.jsx"
 
 function RecentReviews() {
 
@@ -13,7 +13,7 @@ function RecentReviews() {
                 <Link href={`/${user.username}/films/reviews/by/added/`} className="text-[11px] text-[#678] hover:text-hover-blue">MORE</Link>
             </div>
             <div className="w-full flex flex-col">
-                {[reviews[0], reviews[1]].map((item, index) => <VerticalMovieReview key={index} reviewData={item} borderBottom={index === 0} />)}
+                {[reviews[0], reviews[1]].map((item, index) => <VerticalFilmReview key={index} reviewData={item} borderBottom={index === 0} />)}
             </div>
         </div>
     )

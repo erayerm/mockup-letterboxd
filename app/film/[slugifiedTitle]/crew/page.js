@@ -1,7 +1,7 @@
-function CrewOnMovie() {
+function CrewOnFilm() {
     return (
         <div>Crew</div>
     )
 }
 
-export default CrewOnMovie
+export default CrewOnFilm

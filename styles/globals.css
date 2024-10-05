@@ -25,11 +25,11 @@
     border-radius: inherit;
 }
 
-.movie-card:hover .border-button {
+.film-card:hover .border-button {
     @apply shadow-[inset_0_0_0_3px_#00e054] transition-shadow duration-100 ease-in
 }
 
-.movie-card-white:hover .border-button {
+.film-card-white:hover .border-button {
       @apply shadow-[inset_0_0_0_3px_#fff] transition-shadow duration-100 ease-in
 }
 

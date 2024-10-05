@@ -5,15 +5,15 @@ export const user = {
     givenName: "Eray",
     familyName: "",
     location: "Istanbul",
-    watchedMovies: [
+    watchedFilms: [
         {
-            movieID: 1,
+            filmID: 1,
             rate: 5,
             isLiked: true,
             watchedTimes: 4
         },
         {
-            movieID: 2,
+            filmID: 2,
             rate: 4.5,
             isLiked: true,
             watchedTimes: 2
@@ -30,15 +30,15 @@ export const allUsers = [
         givenName: "Eray",
         familyName: "",
         location: "Istanbul",
-        watchedMovies: [
+        watchedFilms: [
             {
-                movieID: 1,
+                filmID: 1,
                 rate: 5,
                 isLiked: true,
                 watchedTimes: 4
             },
             {
-                movieID: 2,
+                filmID: 2,
                 rate: 4.5,
                 isLiked: true,
                 watchedTimes: 2
@@ -52,15 +52,15 @@ export const allUsers = [
         givenName: "Eray",
         familyName: "",
         location: "Istanbul",
-        watchedMovies: [
+        watchedFilms: [
             {
-                movieID: 1,
+                filmID: 1,
                 rate: 5,
                 isLiked: true,
                 watchedTimes: 4
             },
             {
-                movieID: 2,
+                filmID: 2,
                 rate: 4.5,
                 isLiked: true,
                 watchedTimes: 2
@@ -74,15 +74,15 @@ export const allUsers = [
         givenName: "Eray",
         familyName: "",
         location: "Istanbul",
-        watchedMovies: [
+        watchedFilms: [
             {
-                movieID: 1,
+                filmID: 1,
                 rate: 5,
                 isLiked: true,
                 watchedTimes: 4
             },
             {
-                movieID: 2,
+                filmID: 2,
                 rate: 4.5,
                 isLiked: true,
                 watchedTimes: 2
@@ -96,15 +96,15 @@ export const allUsers = [
         givenName: "Eray",
         familyName: "",
         location: "Istanbul",
-        watchedMovies: [
+        watchedFilms: [
             {
-                movieID: 1,
+                filmID: 1,
                 rate: 5,
                 isLiked: true,
                 watchedTimes: 4
             },
             {
-                movieID: 2,
+                filmID: 2,
                 rate: 4.5,
                 isLiked: true,
                 watchedTimes: 2
@@ -118,15 +118,15 @@ export const allUsers = [
         givenName: "Eray",
         familyName: "",
         location: "Istanbul",
-        watchedMovies: [
+        watchedFilms: [
             {
-                movieID: 1,
+                filmID: 1,
                 rate: 5,
                 isLiked: true,
                 watchedTimes: 4
             },
             {
-                movieID: 2,
+                filmID: 2,
                 rate: 4.5,
                 isLiked: true,
                 watchedTimes: 2
@@ -140,15 +140,15 @@ export const allUsers = [
         givenName: "Eray",
         familyName: "",
         location: "Istanbul",
-        watchedMovies: [
+        watchedFilms: [
             {
-                movieID: 1,
+                filmID: 1,
                 rate: 5,
                 isLiked: true,
                 watchedTimes: 4
             },
             {
-                movieID: 2,
+                filmID: 2,
                 rate: 4.5,
                 isLiked: true,
                 watchedTimes: 2
@@ -162,15 +162,15 @@ export const allUsers = [
         givenName: "Eray",
         familyName: "",
         location: "Istanbul",
-        watchedMovies: [
+        watchedFilms: [
             {
-                movieID: 1,
+                filmID: 1,
                 rate: 5,
                 isLiked: true,
                 watchedTimes: 4
             },
             {
-                movieID: 2,
+                filmID: 2,
                 rate: 4.5,
                 isLiked: true,
                 watchedTimes: 2
@@ -184,15 +184,15 @@ export const allUsers = [
         givenName: "Eray",
         familyName: "",
         location: "Istanbul",
-        watchedMovies: [
+        watchedFilms: [
             {
-                movieID: 1,
+                filmID: 1,
                 rate: 5,
                 isLiked: true,
                 watchedTimes: 4
             },
             {
-                movieID: 2,
+                filmID: 2,
                 rate: 4.5,
                 isLiked: true,
                 watchedTimes: 2

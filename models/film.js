@@ -1,10 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
-const movieSchema = new Schema({
+const filmSchema = new Schema({
     title: { type: String, required: true },
     slugifiedTitle: { type: String, required: true, unique: true },
     poster: { type: String },
-    movieImage: { type: String },
+    filmImage: { type: String },
     date: { type: String, required: true },
     directors: [{ type: String }],
     tagline: { type: String },
@@ -32,6 +32,6 @@ const movieSchema = new Schema({
     themes: [{ type: Number }],
 }, { timestamps: true });
 
-const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
+const Film = mongoose.models.Film || mongoose.model("Film", filmSchema);
 
-export default Movie;
+export default Film;
