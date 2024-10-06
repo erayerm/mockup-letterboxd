@@ -6,9 +6,9 @@ import API_URL from "../../api/url"
 import Link from 'next/link';
 import FilmNavbar from '@/app/components/FilmNav';
 import FilmActivityCard from '@/app/components/films/FilmActivityCard';
-import FilmPageFilmCard from '@/app/components/films/FilmPageFilmCard';
 import { getUsersFilmData, updateUsersFilmData } from '@/app/utils/functions';
 import { useSelector } from 'react-redux';
+import FilmCard from '@/app/components/FilmCard';
 
 function SingleFilm({ params, children }) {
     const { slugifiedTitle } = params;
@@ -27,8 +27,6 @@ function SingleFilm({ params, children }) {
                 try {
                     const response = await axios.get(`${API_URL}/films/${slugifiedTitle}/`)
                     setFilmData(response.data.filmData);
-                    console.log(response.data.filmData);
-                    console.log("data get successfully")
                 } catch (error) {
                     console.error(error)
                 }
@@ -42,7 +40,6 @@ function SingleFilm({ params, children }) {
             try {
                 (async () => {
                     const res = await getUsersFilmData(session.user.username, slugifiedTitle);
-                    console.log(res);
                     setRate(res.data.rate);
                     setIsWatched(res.data.watchedTimes > 0);
                     setIsLiked(res.data.isLiked);
@@ -104,17 +101,7 @@ function SingleFilm({ params, children }) {
                         <>
                             <div className='w-full flex justify-between'>
                                 <div className='basis-[24.21%] relative mt-[-40px]'>
-                                    <FilmPageFilmCard filmData={filmData}
-                                        isWatched={isWatched}
-                                        setIsWatched={setIsWatched}
-                                        isLiked={isLiked}
-                                        setIsLiked={setIsLiked}
-                                        isWatchlisted={isWatchlisted}
-                                        setIsWatchlisted={setIsWatchlisted}
-                                        rate={rate}
-                                        setRate={setRate}
-                                        isStarted={isStarted}
-                                        setIsStarted={setIsStarted}
+                                    <FilmCard filmData={filmData} isBig={true}
                                     />
                                 </div>
                                 <div className='basis-[70.53%] mt-[-40px]'>
@@ -133,18 +120,7 @@ function SingleFilm({ params, children }) {
                                             {children}
                                         </div>
                                         <div className='basis-[34.32%] '>{/*right of the right */}
-                                            <FilmActivityCard
-                                                isWatched={isWatched}
-                                                setIsWatched={setIsWatched}
-                                                isLiked={isLiked}
-                                                setIsLiked={setIsLiked}
-                                                isWatchlisted={isWatchlisted}
-                                                setIsWatchlisted={setIsWatchlisted}
-                                                rate={rate}
-                                                setRate={setRate}
-                                                isStarted={isStarted}
-                                                setIsStarted={setIsStarted}
-                                            />
+                                            <FilmActivityCard />
                                         </div>
                                     </div>
 

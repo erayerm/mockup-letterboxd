@@ -2,35 +2,27 @@ import { faCopy, faEye, faHeart, faStopwatch, faX } from "@fortawesome/free-soli
 import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LeftStar from "@/public/img/left-star.svg"
 import RightStar from "@/public/img/right-star.svg"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsersFilmData, updateUsersFilmData } from "@/app/utils/functions";
+import { setFilmData, updateFilmData } from '@/lib/features/film/filmSlice.js';
+import FiveStar from "../FiveStar";
 
-function FilmActivityCard({
-    isWatched,
-    setIsWatched,
-    isLiked,
-    setIsLiked,
-    isWatchlisted,
-    setIsWatchlisted,
-    rate,
-    setRate
-}) {
+function FilmActivityCard() {
     const session = useSelector((state) => state.session);
     const pathname = usePathname()
     const slugifiedTitle = pathname.split("/")[2];
     const basePath = "/film/" + slugifiedTitle + "/"
     const link = "www.letterboxd.coms"
+    const dispatch = useDispatch();
 
     const [watchHover, setWatchHover] = useState(false);
     const [favoriteHover, setFavoriteHover] = useState(false);
     const [watchlistHover, setWatchlistHover] = useState(false);
-    const toggleIsWatched = () => rate < 0 ? setIsWatched(prev => !prev) : false;
-    const toggleIsFavorited = () => setIsLiked(prev => !prev);
-    const toggleIsWatchlisted = () => setIsWatchlisted(prev => !prev);
     const handleWatchRemove = () => setWatchHover(prev => !prev);
     const handleLikeRemove = () => setFavoriteHover(prev => !prev);
     const handleWatchlistRemove = () => setWatchlistHover(prev => !prev);
@@ -43,29 +35,103 @@ function FilmActivityCard({
         setIsShareOpen(true)
     }
 
+    const filmState = useSelector((state) => state.film[slugifiedTitle] || {});
+
+    useEffect(() => {
+        if (filmState.isLoaded) {
+            try {
+                (async () => {
+                    await updateUsersFilmData(session.user.username, {
+                        slugifiedTitle,
+                        rate: filmState.rate,
+                        isWatched: filmState.isWatched,
+                        isLiked: filmState.isLiked,
+                        isWatchlisted: filmState.isWatchlisted
+                    });
+                })();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }, [filmState.isLoaded, filmState.rate, filmState.isLiked, filmState.isWatchlisted, filmState.isWatched]);
+
+    const toggleIsWatched = () => {
+        if (filmState.rate > -1 && filmState.isWatched) return;
+        dispatch(updateFilmData({
+            slugifiedTitle,
+            updates: { isWatched: !filmState.isWatched }
+        }));
+    };
+
+    const toggleIsLiked = () => {
+        dispatch(updateFilmData({
+            slugifiedTitle,
+            updates: { isLiked: !filmState.isLiked }
+        }));
+    };
+
+    const toggleIsWatchlisted = () => {
+        dispatch(updateFilmData({
+            slugifiedTitle,
+            updates: { isWatchlisted: !filmState.isWatchlisted }
+        }));
+    }
+
+    useEffect(() => {
+        if (session && !filmState.isLoaded) {
+            try {
+                (async () => {
+                    const res = await getUsersFilmData(session.user.username, slugifiedTitle);
+                    dispatch(setFilmData({
+                        slugifiedTitle,
+                        data: {
+                            rate: res.data.rate,
+                            isWatched: res.data.watchedTimes > 0,
+                            isLiked: res.data.isLiked,
+                            isWatchlisted: res.data.isWatchlisted,
+                            isLoaded: true
+                        }
+                    }));
+                })();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }, [session, filmState.isLoaded]);
+
     return (
         <div className="w-full max-w-[230px] rounded-sm text-[#bcd]">
             <ul className="space-y-[1px] film-activity-card-ul">
                 <li>
                     <div className="flex justify-around">
                         <div onMouseEnter={handleWatchRemove} onMouseLeave={handleWatchRemove} className="basis-[33%] text-center flex flex-col">
-                            <button className="text-[32px]" onClick={toggleIsWatched}><FontAwesomeIcon className={isWatched ? 'text-green-400' : ""} icon={faEye} /></button>
-                            <p>{isWatched ? watchHover ? "Remove" : "Watched" : "Watch"}</p>
+                            <button className="text-[32px]" onClick={toggleIsWatched}><FontAwesomeIcon className={filmState.isWatched ? 'text-green-400' : ""} icon={faEye} /></button>
+                            <p>{filmState.isWatched ? watchHover ? "Remove" : "Watched" : "Watch"}</p>
                         </div>
                         <div onMouseEnter={handleLikeRemove} onMouseLeave={handleLikeRemove} className="basis-[33%] text-center flex flex-col">
-                            <button className="text-[32px]" onClick={toggleIsFavorited}><FontAwesomeIcon className={isLiked ? 'text-[#FF9111]' : ""} icon={faHeart} /></button>
-                            <p>{isLiked ? favoriteHover ? "Remove" : "Liked" : "Like"}</p>
+                            <button className="text-[32px]" onClick={toggleIsLiked}><FontAwesomeIcon className={filmState.isLiked ? 'text-[#FF9111]' : ""} icon={faHeart} /></button>
+                            <p>{filmState.isLiked ? favoriteHover ? "Remove" : "Liked" : "Like"}</p>
                         </div>
                         <div onMouseEnter={handleWatchlistRemove} onMouseLeave={handleWatchlistRemove} className="basis-[33%] text-center flex flex-col">
-                            <button className="text-[32px]" onClick={toggleIsWatchlisted}><FontAwesomeIcon className={isWatchlisted ? 'text-[#41BCF4]' : ""} icon={faStopwatch} /></button>
-                            <p>{isWatchlisted ? watchlistHover ? "Remove" : "Watchlist" : "Watchlist"}</p>
+                            <button className="text-[32px]" onClick={toggleIsWatchlisted}><FontAwesomeIcon className={filmState.isWatchlisted ? 'text-[#41BCF4]' : ""} icon={faStopwatch} /></button>
+                            <p>{filmState.isWatchlisted ? watchlistHover ? "Remove" : "Watchlist" : "Watchlist"}</p>
                         </div>
                     </div>
                 </li>
                 <li>
                     <div className="flex flex-col items-center gap-1">
                         <p>Rated</p>
-                        <div><FiveStar greenStars={rate} setGreenStars={setRate} /></div>
+                        <div>
+                            <FiveStar
+                                greenStars={filmState.rate}
+                                isBig={true}
+                                setGreenStars={(newRate) => {
+                                    dispatch(updateFilmData({
+                                        slugifiedTitle,
+                                        updates: newRate > -1 ? { rate: newRate, isWatched: true } : { rate: newRate }
+                                    }))
+                                }} />
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -99,60 +165,5 @@ function FilmActivityCard({
         </div>
     )
 }
-
-const FiveStar = ({ greenStars, setGreenStars }) => {
-    const array = Array(10).fill(0);
-    const [blueStars, setBlueStars] = useState(-1);
-    const [isClicked, setIsClicked] = useState(false);
-    const [isRemoveOpen, setIsRemoveOpen] = useState(false);
-
-    const handleMouseEnter = async (index) => {
-        setBlueStars(index)
-    };
-    const handleMouseLeave = () => {
-        setIsClicked(false);
-        setBlueStars(-1);
-    };
-    const handleClick = (index) => {
-        setGreenStars(index);
-        setIsClicked(true);
-    };
-    const handleRemoveRating = () => {
-        setGreenStars(-1);
-    }
-
-    return (<div className={'relative'} onMouseEnter={() => setIsRemoveOpen(true)} onMouseLeave={() => setIsRemoveOpen(false)}>
-        <FontAwesomeIcon icon={faX} className={"size-[13px] text-[#8D97A0] cursor-pointer absolute top-[14.5px] left-[-3px] transform -translate-x-1/2 -translate-y-1/2 " + (greenStars != -1 && isRemoveOpen ? "block" : "hidden")} onClick={handleRemoveRating} />
-        <div className='flex gap-0 px-[7px]'>
-            {array.map((i, index) => {
-                const StarComponent = index % 2 === 0 ? LeftStar : RightStar;
-                return (
-                    <StarComponent
-                        key={index}
-                        className='w-[16px] h-[30px]'
-                        onMouseLeave={handleMouseLeave}
-                        onMouseEnter={() => handleMouseEnter(index)}
-                        onClick={() => handleClick(index)}
-                        data-name={index}
-                        fill={
-                            isClicked
-                                ? greenStars >= index
-                                    ? "#00E054"//green
-                                    : "#324554"//empty
-                                : blueStars >= index
-                                    ? "#41BCF4"//blue
-                                    : blueStars == -1
-                                        ? greenStars >= index
-                                            ? "#00E054"//green
-                                            : "#324554"//empty
-                                        : "#324554"//empty
-                        }
-                    />
-                )
-            })}
-        </div>
-    </div>
-    );
-};
 
 export default FilmActivityCard

@@ -19,8 +19,7 @@ function ProfileSettingsForm() {
     useEffect(() => {
         async function getUser(username) {
             try {
-                const response = await axios.get(`${API_URL}/users/${session.user.username}`);
-                console.log(`User ${username}'s data fetched successfully`)
+                const response = await axios.get(`${API_URL}/users/${username}`);
                 setUserData(response.data.userData);
             } catch (error) {
                 console.error('Error fetching user data:', error);

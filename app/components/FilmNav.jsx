@@ -16,8 +16,6 @@ const FilmNavbar = () => {
     const pathName = usePathname();
     const basePath = pathName.split('/').slice(0, 3).join('/');
 
-    console.log(basePath)
-
     return (
         <div className='pt-8 mb-4 font-bold relative flex justify-between w-full items-center border-b border-b-gray-500'>
             <nav className="flex space-x-4 h-full">

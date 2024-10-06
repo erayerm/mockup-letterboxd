@@ -1,5 +1,3 @@
-"use client"
-
 import axios from "axios";
 import API_URL from "@/app/api/url";
 

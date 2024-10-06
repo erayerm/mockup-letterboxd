@@ -57,6 +57,7 @@ function FilmCard({ filmData, isBig, isRatingOn }) {
     }, [filmState.isLoaded, filmState.rate, filmState.isLiked, filmState.isWatchlisted, filmState.isWatched]);
 
     const toggleIsWatched = () => {
+        if (filmState.rate > -1 && filmState.isWatched) return;
         dispatch(updateFilmData({
             slugifiedTitle,
             updates: { isWatched: !filmState.isWatched }
@@ -71,10 +72,6 @@ function FilmCard({ filmData, isBig, isRatingOn }) {
     };
 
     const toggleIsMenuOpen = () => setIsMenuOpen((prev) => !prev);
-
-    useEffect(() => {
-        console.log(filmState);
-    }, [filmState]);
 
     return (
         <>
@@ -92,13 +89,14 @@ function FilmCard({ filmData, isBig, isRatingOn }) {
                                 <div className='absolute z-[50] bottom-[-100%] left-[108%] bg-[#8899AA] text-[#2c3440] rounded-md shadow-lg'>
                                     <ul>
                                         <li className='p-2 text-center w-full flex justify-center'>
-                                            <FiveStar greenStars={filmState.rate} setGreenStars={(newRate) => {
-                                                console.log("Rating updated");
-                                                dispatch(updateFilmData({
-                                                    slugifiedTitle,
-                                                    updates: { rate: newRate }
-                                                }));
-                                            }} />
+                                            <FiveStar
+                                                greenStars={filmState.rate}
+                                                setGreenStars={(newRate) => {
+                                                    dispatch(updateFilmData({
+                                                        slugifiedTitle,
+                                                        updates: newRate > -1 ? { rate: newRate, isWatched: true } : { rate: newRate }
+                                                    }))
+                                                }} />
                                         </li>
                                         <CardNav filmUrl={slugifiedTitle} />
                                     </ul>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import LeftStar from "@/public/img/left-star.svg"
 import RightStar from "@/public/img/right-star.svg"
 
-const FiveStar = ({ greenStars, setGreenStars }) => {
+const FiveStar = ({ greenStars, setGreenStars, isBig }) => {
     const array = Array(10).fill(0);
     const [blueStars, setBlueStars] = useState(-1);
     const [isClicked, setIsClicked] = useState(false);
@@ -26,14 +26,16 @@ const FiveStar = ({ greenStars, setGreenStars }) => {
     }
 
     return (<div className={'relative'} onMouseEnter={() => setIsRemoveOpen(true)} onMouseLeave={() => setIsRemoveOpen(false)}>
-        <FontAwesomeIcon icon={faX} className={"size-[10px] text-[#324554] cursor-pointer absolute top-[11.5px] left-0 transform -translate-x-1/2 -translate-y-1/2 " + (greenStars != -1 && isRemoveOpen ? "block" : "hidden")} onClick={handleRemoveRating} />
+        <FontAwesomeIcon icon={faX} className={"cursor-pointer absolute transform -translate-x-1/2 -translate-y-1/2 "
+            + (isBig ? "size-[13px] text-[#8D97A0] top-[14.5px] left-[-3px] " : "size-[10px] text-[#324554] top-[11.5px] left-0 ") + (greenStars != -1 && isRemoveOpen ? "block" : "hidden")} onClick={handleRemoveRating} />
+
         <div className='flex gap-0 px-[7px]'>
             {array.map((i, index) => {
                 const StarComponent = index % 2 === 0 ? LeftStar : RightStar;
                 return (
                     <StarComponent
                         key={index}
-                        className='w-[12px] h-[22.5px]'
+                        className={isBig ? "w-[16px] h-[30px]" : 'w-[12px] h-[22.5px]'}
                         onMouseLeave={handleMouseLeave}
                         onMouseEnter={() => handleMouseEnter(index)}
                         onClick={() => handleClick(index)}
