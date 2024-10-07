@@ -35,11 +35,9 @@ export async function PUT(req, { params }) {
             if (!user.watchedFilms) user.watchedFilms = []
             user.watchedFilms.push(newWatchedFilm);
         }
-        console.log(user);
         await user.save();
         return NextResponse.json({ message: "Film added? successfully", user }, { status: 201 });
     } catch (error) {
-        console.log(error)
         return NextResponse.json({ message: error }, { status: 500 });
     }
 }
@@ -58,7 +56,6 @@ export async function DELETE(req, { params }) {
         await user.save();
         return NextResponse.json({ message: "Film deleted successfully", user }, { status: 201 });
     } catch (error) {
-        console.log(error)
         return NextResponse.json({ message: error }, { status: 500 });
     }
 }
@@ -84,7 +81,6 @@ export async function GET(req, { params }) {
 
         return NextResponse.json({ message: "Film not found", found: false }, { status: 200 });
     } catch (error) {
-        console.log(error); // Hata mesajını yazdır
         return NextResponse.json({ message: error.message || "An error occurred" }, { status: 500 });
     }
 }

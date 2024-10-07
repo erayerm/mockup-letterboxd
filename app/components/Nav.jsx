@@ -97,8 +97,8 @@ export default function Nav() {
                                                     <div onMouseEnter={handleMouseEnter}
                                                         onMouseLeave={handleMouseLeave}
                                                         className={"flex gap-2 px-2 py-2 items-center " + (isMenuOpen ? "text-secondary-white" : "")}>
-                                                        <Image src={user.photo} alt="profile picture" width={24} height={24} className="rounded-full aspect-square mt-[-1px]" />
-                                                        <div>{user.username.toUpperCase()}</div>
+                                                        <img src={session.user.photo ? session.user.photo : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} alt="profile picture" className="size-[24px] rounded-full aspect-square mt-[-1px]" />
+                                                        <div>{session.user.username.toUpperCase()}</div>
                                                         <div className="mt-[-1px]"><FontAwesomeIcon icon={faChevronDown} /></div>
                                                     </div>
                                                     {isMenuOpen &&
