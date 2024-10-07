@@ -5,8 +5,7 @@ import ProfileNav from "../components/profile/ProfileNav"
 import ProfileMain from "../components/profile/ProfileMain"
 import ProfileSidebar from "../components/profile/ProfileSidebar"
 import { useEffect, useState } from "react"
-import API_URL from "../api/url"
-import axios from "axios"
+import { getUserData } from "@/utils/functions"
 
 
 function Profile({ params }) {
@@ -15,7 +14,7 @@ function Profile({ params }) {
     useEffect(() => {
         async function getUser(username) {
             try {
-                const response = await axios.get(`${API_URL}/users/${username}`);
+                const response = await getUserData(username);
                 setUserData(response.data.userData);
             } catch (error) {
                 console.error('Error fetching user data:', error);

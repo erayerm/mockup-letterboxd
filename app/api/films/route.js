@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Film from "@/models/film";
 import connectMongoDB from "@/lib/mongodb";
-import { titleSlugifier } from "@/app/utils/functions";
+import { titleSlugifier } from "@/utils/functions";
 
 export async function POST(request, { params }) {
     try {

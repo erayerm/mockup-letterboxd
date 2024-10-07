@@ -6,8 +6,7 @@ import React, { useEffect } from 'react'
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import API_URL from '../api/url';
-import axios from 'axios';
+import { getUserData, updateUserData } from "@/utils/functions";
 
 function ProfileSettingsForm() {
     const session = useSelector((state) => state.session);
@@ -19,7 +18,7 @@ function ProfileSettingsForm() {
     useEffect(() => {
         async function getUser(username) {
             try {
-                const response = await axios.get(`${API_URL}/users/${username}`);
+                const response = await getUserData(username);
                 setUserData(response.data.userData);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -40,7 +39,7 @@ function ProfileSettingsForm() {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.put(`${API_URL}/users/${session.user.username}`, data);
+            const response = await updateUserData(session.user.username, data);
             console.log("User updated successfully:", response.data)
         } catch (error) {
             console.error(error)

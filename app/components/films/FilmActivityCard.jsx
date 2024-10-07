@@ -3,12 +3,10 @@ import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useRef, useState } from "react";
-import LeftStar from "@/public/img/left-star.svg"
-import RightStar from "@/public/img/right-star.svg"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsersFilmData, updateUsersFilmData } from "@/app/utils/functions";
+import { getUsersFilmData, updateUsersFilmData } from "@/utils/functions";
 import { setFilmData, updateFilmData } from '@/lib/features/film/filmSlice.js';
 import FiveStar from "../FiveStar";
 

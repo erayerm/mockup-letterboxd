@@ -1,12 +1,10 @@
 "use client"
 
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import API_URL from "../../api/url"
 import Link from 'next/link';
 import FilmNavbar from '@/app/components/FilmNav';
 import FilmActivityCard from '@/app/components/films/FilmActivityCard';
-import { getUsersFilmData, updateUsersFilmData } from '@/app/utils/functions';
+import { getFilmData, getUsersFilmData, updateUsersFilmData } from '@/utils/functions';
 import { useSelector } from 'react-redux';
 import FilmCard from '@/app/components/FilmCard';
 
@@ -25,7 +23,8 @@ function SingleFilm({ params, children }) {
         if (slugifiedTitle) {
             const getFilm = async () => {
                 try {
-                    const response = await axios.get(`${API_URL}/films/${slugifiedTitle}/`)
+                    const response = await getFilmData(slugifiedTitle)
+                    console.log(response)
                     setFilmData(response.data.filmData);
                 } catch (error) {
                     console.error(error)

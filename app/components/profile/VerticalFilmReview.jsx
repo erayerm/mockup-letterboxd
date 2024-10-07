@@ -5,7 +5,7 @@ import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import FilmCard from "../FilmCard.jsx"
-import { titleSlugifier } from "@/app/utils/functions.js"
+import { titleSlugifier } from "@/utils/functions.js"
 
 
 export default function VerticalFilmReview({ reviewData, borderBottom }) {

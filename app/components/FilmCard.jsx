@@ -4,10 +4,11 @@ import { faEllipsis, faEye, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsersFilmData, titleSlugifier, updateUsersFilmData } from '../utils/functions.js';
+import { getUsersFilmData, titleSlugifier, updateUsersFilmData } from "@/utils/functions";
 import CardNav from './CardNav.jsx';
 import FiveStar from './FiveStar';
 import { setFilmData, updateFilmData } from '@/lib/features/film/filmSlice.js';
+import { useRouter } from 'next/navigation.js';
 
 function FilmCard({ filmData, isBig, isRatingOn }) {
     const session = useSelector((state) => state.session);
@@ -15,6 +16,7 @@ function FilmCard({ filmData, isBig, isRatingOn }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const slugifiedTitle = titleSlugifier(filmData.title);
     const filmState = useSelector((state) => state.film[slugifiedTitle] || {});
+    const router = useRouter();
 
     useEffect(() => {
         if (session && !filmState.isLoaded) {
@@ -105,7 +107,7 @@ function FilmCard({ filmData, isBig, isRatingOn }) {
                             </>
                         }
                     </div>
-                    <span onClick={() => true /* Open Modal */} className="border-button cursor-pointer"></span>
+                    <span onClick={() => router.push("/film/" + (slugifiedTitle))} className="border-button cursor-pointer"></span>
                 </div>
                 {isRatingOn &&
                     <div>
