@@ -9,7 +9,12 @@ import { useState } from "react";
 import { useForm } from 'react-hook-form';
 
 function SignInForm({ formToggle }) {
-    const { register: formRegister, handleSubmit, reset } = useForm();
+    const { register: formRegister, handleSubmit, reset } = useForm({
+        defaultValues: {
+            identifier: "test123@gmail.com",
+            password: "test123"
+        }
+    });
     const [error, setError] = useState("");
     const router = useRouter();
 
