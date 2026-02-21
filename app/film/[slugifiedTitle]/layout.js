@@ -14,7 +14,7 @@ import FilmCard from "@/app/components/FilmCard";
 
 function SingleFilm({ params, children }) {
   const { slugifiedTitle } = params;
-  const [filmData, setFilmData] = useState({});
+  const [filmData, setFilmData] = useState(null);
   const [isWatched, setIsWatched] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isWatchlisted, setIsWatchlisted] = useState(false);
@@ -91,14 +91,19 @@ function SingleFilm({ params, children }) {
   }, [isWatched]);
 
   return (
-    <div className="w-full bg-[#14181C] z-[-50] relative">
-      <div className=" mt-[-75px] z-[-20] w-full bg-[#14181C] flex justify-center">
-        <div className="relative max-w-[1200px] max-h-[520px]">
-          <img
-            src={filmData?.filmImage}
-            alt="example"
-            className="w-full h-auto object-cover"
-          />
+    <div className="flex-1 w-full bg-[#14181C] z-[-50] relative">
+      <div className="mt-[-75px] z-[-20] w-full bg-[#14181C] flex justify-center min-w-[900px]">
+        <div className="relative w-full max-w-[1200px] h-[520px]">
+          {filmData ? (
+            <img
+              src={filmData?.filmImage}
+              alt="example"
+              className="w-full h-auto object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-900"></div>
+          )}
+
           <div className="absolute inset-x-0 top-0 h-[100px] bg-gradient-to-b from-[#14181C] to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-[200px] bg-gradient-to-t from-[#14181C] to-transparent" />
           <div className="absolute inset-y-0 left-0 w-[250px] bg-gradient-to-r from-[#14181C] to-transparent" />
@@ -107,7 +112,7 @@ function SingleFilm({ params, children }) {
       </div>
       <div className="bg-[#14181C] h-[500px] relative">
         <div className="mx-auto max-w-[950px]">
-          {filmData.title && (
+          {filmData?.title && (
             <>
               <div className="w-full flex justify-between">
                 <div className="basis-[24.21%] relative mt-[-40px]">
@@ -116,23 +121,25 @@ function SingleFilm({ params, children }) {
                 <div className="basis-[70.53%] mt-[-40px]">
                   <div className="flex leading-none items-baseline">
                     <h1 className="text-[#fff] text-[34px]">
-                      {filmData.title}
+                      {filmData?.title}
                     </h1>
                     <Link
                       className="text-[16px] pl-2 underline text-gray-300"
-                      href={"/films/year/" + filmData.date}
+                      href={"/films/year/" + filmData?.date}
                     >
-                      {filmData.date}
+                      {filmData?.date}
                     </Link>
                     <span className="text-[16px] pl-2">
                       Directed By{" "}
-                      {filmData.directors.map((item, index) => (
+                      {filmData?.directors.map((item, index) => (
                         <span key={index}>
                           <span className="underline cursor-pointer text-gray-300">
                             {item}
                           </span>
                           <span>
-                            {index != filmData.directors.length - 1 ? ", " : ""}
+                            {index != filmData?.directors.length - 1
+                              ? ", "
+                              : ""}
                           </span>
                         </span>
                       ))}
@@ -141,8 +148,10 @@ function SingleFilm({ params, children }) {
                   <div className="flex justify-between pt-10">
                     <div className="basis-[58.21%] text-[#9ab]">
                       {/*left of the right */}
-                      <h2 className="pb-5">{filmData.tagline.toUpperCase()}</h2>
-                      <p className="text-[16px]">{filmData.description}</p>
+                      <h2 className="pb-5">
+                        {filmData?.tagline.toUpperCase()}
+                      </h2>
+                      <p className="text-[16px]">{filmData?.description}</p>
                       <FilmNavbar />
                       {children}
                     </div>
