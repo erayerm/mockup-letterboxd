@@ -3,44 +3,42 @@
 @tailwind utilities;
 
 @layer components {
-    .border_container{
-        @apply relative;
-    }
-    .border_container::after{
-        @apply absolute bottom-0 left-[10%] w-[80%] border-b-2 border-b-[#00E054] content-[""];
-    }
-    .container{
-        @apply max-w-[950px] mx-auto 
-    }
+  .border_container {
+    @apply relative;
+  }
+  .border_container::after {
+    @apply absolute bottom-0 left-[10%] w-[80%] border-b-2 border-b-[#00E054] content-[""];
+  }
+  .container {
+    @apply max-w-[950px] mx-auto;
+  }
 }
 
-
 .border-button {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    inset: 0;
-    box-shadow: inset 0px 0px 0px 0px #00e054; 
-    transition: box-shadow 0s ease-in;
-    border-radius: inherit;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  box-shadow: inset 0px 0px 0px 0px #00e054;
+  transition: box-shadow 0s ease-in;
+  border-radius: inherit;
 }
 
 .film-card:hover .border-button {
-    @apply shadow-[inset_0_0_0_3px_#00e054] transition-shadow duration-100 ease-in
+  @apply shadow-[inset_0_0_0_3px_#00e054] transition-shadow duration-100 ease-in;
 }
 
 .film-card-white:hover .border-button {
-      @apply shadow-[inset_0_0_0_3px_#fff] transition-shadow duration-100 ease-in
+  @apply shadow-[inset_0_0_0_3px_#fff] transition-shadow duration-100 ease-in;
 }
 
 .register-input {
-    @apply bg-[#CCDDEE] text-[#556677] focus:text-[#000] focus:bg-[#fff] h-8 py-1 px-2.5 rounded
+  @apply bg-[#CCDDEE] text-[#556677] focus:text-[#000] focus:bg-[#fff] h-8 py-1 px-2.5 rounded;
 }
 
 .register-input-div {
-    @apply mb-4 flex gap-1 flex-col w-full items-start
+  @apply mb-4 flex gap-1 flex-col w-full items-start;
 }
-
 
 /* https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
 .container-check {
@@ -70,7 +68,7 @@
   left: 0;
   height: 20px;
   width: 20px;
-  background-color: #CCDDEE;
+  background-color: #ccddee;
   border-radius: 5px;
 }
 
@@ -101,60 +99,62 @@
 }
 
 .form-error-message {
-  @apply text-red-400
+  @apply text-red-400;
 }
 
 .sign-in-input {
-    @apply bg-[#2D3440] focus:bg-[#fff] text-[#556677] focus:text-[#000] h-8 py-1 px-2.5 rounded
+  @apply bg-[#2D3440] focus:bg-[#fff] text-[#556677] focus:text-[#000] h-8 py-1 px-2.5 rounded;
 }
 
 .sign-in-input-div {
-    @apply mb-4 flex gap-1 flex-col w-full items-start
+  @apply mb-4 flex gap-1 flex-col w-full items-start;
 }
 
-
 .settings-input {
-    @apply shadow-[inset_0_-1px_0_#456] bg-[#2D3440] focus:bg-[#fff] text-[#556677] focus:text-[#000] h-8 py-1 px-2.5 mt-1 rounded
+  @apply shadow-[inset_0_-1px_0_#456] bg-[#2D3440] focus:bg-[#fff] text-[#556677] focus:text-[#000] h-8 py-1 px-2.5 mt-1 rounded;
 }
 
 .settings-input-div {
-    @apply py-2 w-full
+  @apply py-2 w-full;
 }
 
 .settings-label {
-  @apply mb-2
+  @apply mb-2;
 }
 
-textarea.settings-input{
+textarea.settings-input {
   height: auto;
 }
-
 
 .checkbox {
   appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid #2D3440;
-  background-color: #2D3440;
+  border: 2px solid #2d3440;
+  background-color: #2d3440;
   position: relative;
 }
 
 .checkbox:checked::after {
   content: "✔";
-  @apply text-gray-400 left-[4px] top-0 absolute
+  @apply text-gray-400 left-[4px] top-0 absolute;
 }
 
-.desc-pron>span{
-  @apply text-[#fff]
+.desc-pron > span {
+  @apply text-[#fff];
 }
 
+.film-activity-card-ul > li {
+  @apply py-3 text-center bg-[#445566];
+}
+.film-activity-card-ul > li:first-child {
+  @apply rounded-t-md;
+}
+.film-activity-card-ul > li:last-child {
+  @apply rounded-b-md;
+}
 
-.film-activity-card-ul>li {
-  @apply py-3 text-center bg-[#445566]
-}
-.film-activity-card-ul>li:first-child {
-  @apply rounded-t-md
-}
-.film-activity-card-ul>li:last-child {
-  @apply rounded-b-md
+html,
+body {
+  height: 100%;
 }

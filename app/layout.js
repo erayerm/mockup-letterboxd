@@ -21,16 +21,16 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <main className="relative z-0 min-h-screen font-[Roboto] text-[13px] text-primary-gray">
-          <SessionWrapper>
-            <StoreProvider>
-              <SessionManager>
+        <SessionWrapper>
+          <StoreProvider>
+            <SessionManager>
+              <main className="relative z-0 min-h-screen flex flex-col font-[Roboto] text-[13px] text-primary-gray">
                 <Nav />
                 {children}
-              </SessionManager>
-            </StoreProvider>
-          </SessionWrapper>
-        </main>
+              </main>
+            </SessionManager>
+          </StoreProvider>
+        </SessionWrapper>
       </body>
     </html>
   );
